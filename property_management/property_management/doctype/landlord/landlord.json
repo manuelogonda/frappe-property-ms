@@ -1,0 +1,124 @@
+{
+ "actions": [],
+ "allow_bulk_edit": 1,
+ "allow_rename": 1,
+ "autoname": "LL-{#####}",
+ "creation": "2026-11-09 08:36:31.023104",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "landlord_type",
+  "landlord_name",
+  "mpesa_phone_number",
+  "email",
+  "id_number",
+  "kra_pin",
+  "address",
+  "kyc_documents",
+  "bank_account_number",
+  "bank_name",
+  "status"
+ ],
+ "fields": [
+  {
+   "fieldname": "landlord_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Landlord Type",
+   "options": "Individual\nCompany",
+   "reqd": 1
+  },
+  {
+   "fieldname": "landlord_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Landlord Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "mpesa_phone_number",
+   "fieldtype": "Phone",
+   "in_list_view": 1,
+   "label": "MPESA Phone Number",
+   "reqd": 1
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Email",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "id_number",
+   "fieldtype": "Data",
+   "label": "ID Number",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "kra_pin",
+   "fieldtype": "Data",
+   "label": "KRA PIN",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "address",
+   "fieldtype": "Small Text",
+   "label": "Address"
+  },
+  {
+   "fieldname": "kyc_documents",
+   "fieldtype": "Attach",
+   "label": "KYC Documents",
+   "reqd": 1
+  },
+  {
+   "fieldname": "bank_account_number",
+   "fieldtype": "Password",
+   "label": "Bank Account Number",
+   "reqd": 1
+  },
+  {
+   "fieldname": "bank_name",
+   "fieldtype": "Data",
+   "label": "Bank Name"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Pending\nVerified\nRejected\nInactive"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-11-09 09:00:27.660349",
+ "modified_by": "Administrator",
+ "module": "Property Management",
+ "name": "Landlord",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,150 @@
+{
+ "actions": [],
+ "allow_bulk_edit": 1,
+ "allow_rename": 1,
+ "creation": "2026-11-09 11:28:36.083533",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "lease_number",
+  "tenant",
+  "property",
+  "unit",
+  "management_agreement",
+  "status",
+  "start_date",
+  "end_date",
+  "monthly_rent",
+  "security_deposit",
+  "payment_due_day",
+  "notice_period",
+  "renewal_allowed",
+  "renewal_notes",
+  "special_terms"
+ ],
+ "fields": [
+  {
+   "fieldname": "lease_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Lease Number",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tenant",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Tenant",
+   "options": "Tenant",
+   "reqd": 1
+  },
+  {
+   "fieldname": "property",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Property",
+   "options": "Property",
+   "reqd": 1
+  },
+  {
+   "fieldname": "unit",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Unit",
+   "options": "Unit",
+   "reqd": 1
+  },
+  {
+   "fieldname": "management_agreement",
+   "fieldtype": "Link",
+   "label": "Management Agreement",
+   "options": "Management Agreement",
+   "reqd": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Draft\nPending Approval\nActive\nExpired\nTerminated",
+   "reqd": 1
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Start Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "End Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "monthly_rent",
+   "fieldtype": "Currency",
+   "label": "Monthly Rent",
+   "reqd": 1
+  },
+  {
+   "fieldname": "security_deposit",
+   "fieldtype": "Currency",
+   "label": "Security Deposit",
+   "reqd": 1
+  },
+  {
+   "fieldname": "payment_due_day",
+   "fieldtype": "Int",
+   "label": "Payment Due Day",
+   "reqd": 1
+  },
+  {
+   "fieldname": "notice_period",
+   "fieldtype": "Int",
+   "label": "Notice Period"
+  },
+  {
+   "default": "0",
+   "fieldname": "renewal_allowed",
+   "fieldtype": "Check",
+   "label": "Renewal Allowed"
+  },
+  {
+   "fieldname": "renewal_notes",
+   "fieldtype": "Small Text",
+   "label": "Renewal Notes"
+  },
+  {
+   "fieldname": "special_terms",
+   "fieldtype": "Text Editor",
+   "label": "Special Terms"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-11-09 11:40:09.413465",
+ "modified_by": "Administrator",
+ "module": "Property Management",
+ "name": "Lease",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}
