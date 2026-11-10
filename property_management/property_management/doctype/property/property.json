@@ -12,9 +12,10 @@
   "property_type",
   "address",
   "county",
-  "townarea",
+  "town-area",
   "status",
-  "description"
+  "description",
+   "landlords"
  ],
  "fields": [
   {
@@ -47,6 +48,13 @@
    "label": "Address",
    "reqd": 1
   },
+   {
+     "fieldname": "landlords",
+     "fieldtype": "Table",
+     "label": "Landlords",
+     "options": "Property Landlord",
+     "reqd": 1
+   },
   {
    "fieldname": "county",
    "fieldtype": "Data",
@@ -54,7 +62,7 @@
    "reqd": 1
   },
   {
-   "fieldname": "townarea",
+   "fieldname": "town-area",
    "fieldtype": "Data",
    "label": "Town/Area",
    "reqd": 1
