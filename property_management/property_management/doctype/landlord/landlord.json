@@ -1,7 +1,7 @@
 {
  "actions": [],
- "allow_bulk_edit": 1,
- "allow_rename": 1,
+ "allow_bulk_edit": 0,
+ "allow_rename": 0,
  "autoname": "LL-.YYYY.-.#####",
  "creation": "2026-11-09 08:36:31.023104",
  "doctype": "DocType",
@@ -11,7 +11,7 @@
   "landlord_name",
   "mpesa_phone_number",
   "email",
-  "id_number",
+  "id_number_or_registration_number",
   "kra_pin",
   "address",
   "kyc_documents",
@@ -51,9 +51,9 @@
    "unique": 1
   },
   {
-   "fieldname": "id_number",
+   "fieldname": "id_number_or_registration_number",
    "fieldtype": "Data",
-   "label": "ID Number",
+   "label": "ID Number / Registration Number",
    "reqd": 1,
    "unique": 1
   },
@@ -90,6 +90,9 @@
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
+    "default": "Pending",
+    "in_list_view": 1,
+    "in_standard_filter": 1,
    "options": "Pending\nVerified\nRejected\nInactive"
   }
  ],
@@ -114,7 +117,38 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
-  }
+  },
+   {
+     "email": 1,
+     "export": 1,
+     "print": 1,
+     "read": 1,
+     "report": 1,
+     "role": "Accounts Manager"
+   },
+   {
+     "create": 1,
+     "delete": 1,
+     "email": 1,
+     "export": 1,
+     "print": 1,
+     "read": 1,
+     "report": 1,
+     "role": "System Manager",
+     "share": 1,
+     "write": 1,
+     "permlevel": 1
+   },
+   {
+     "email": 1,
+     "export": 1,
+     "print": 1,
+     "read": 1,
+     "report": 1,
+     "role": "Accounts Manager",
+     "write": 1,
+     "permlevel": 1
+   }
  ],
  "row_format": "Dynamic",
  "rows_threshold_for_grid_search": 20,
