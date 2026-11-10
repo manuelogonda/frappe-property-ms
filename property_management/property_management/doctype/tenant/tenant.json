@@ -2,6 +2,7 @@
  "actions": [],
  "allow_bulk_edit": 1,
  "allow_rename": 1,
+ "autoname": "format:TN-{#####}",
  "creation": "2026-11-09 10:40:37.871028",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -10,9 +11,10 @@
   "tenant_name",
   "phone_number",
   "email",
-  "id_number",
+   "customer",
+  "id_number_or_registration_number",
   "kra_pin",
-  "kra_documents",
+  "kyc_documents",
   "status"
  ],
  "fields": [
@@ -21,7 +23,7 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Tenant Type",
-   "options": "individual\ncompany",
+   "options": "Individual\nCompany",
    "reqd": 1
   },
   {
@@ -41,15 +43,16 @@
   {
    "fieldname": "email",
    "fieldtype": "Data",
+    "options": "Email",
    "in_list_view": 1,
-   "label": "Email",
-   "reqd": 1
+   "label": "Email"
   },
   {
-   "fieldname": "id_number",
+   "fieldname": "id_number_or_registration_number",
    "fieldtype": "Data",
-   "label": "ID Number",
-   "reqd": 1
+   "label": "ID Number or Registration Number",
+   "reqd": 1,
+   "unique": 1
   },
   {
    "fieldname": "kra_pin",
@@ -57,26 +60,35 @@
    "label": "KRA PIN"
   },
   {
-   "fieldname": "kra_documents",
+   "fieldname": "kyc_documents",
    "fieldtype": "Attach",
-   "label": "KRA Documents",
-   "reqd": 1
+   "label": "KYC Documents"
   },
   {
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
    "options": "Pending\nVerified\nInactive",
+    "default": "Pending",
    "reqd": 1
-  }
+  },
+   {
+     "fieldname": "customer",
+     "fieldtype": "Link",
+     "label": "ERPNext Customer",
+     "options": "Customer",
+     "no_copy": 1,
+     "read_only": 1
+   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-11-09 10:54:49.091322",
+ "modified": "2026-11-10 09:35:48.871601",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Tenant",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {
