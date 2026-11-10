@@ -11,7 +11,7 @@
   "start_date",
   "end_date",
   "pricing_module",
-  "management_fee",
+  "management_fee_percent",
   "fixed_management_fee",
   "status",
   "notes"
@@ -28,6 +28,7 @@
    "fieldname": "property",
    "fieldtype": "Link",
    "in_list_view": 1,
+    "in_standard_filter": 1,
    "label": "Property",
    "options": "Property",
    "reqd": 1
@@ -54,7 +55,7 @@
    "reqd": 1
   },
   {
-   "fieldname": "management_fee",
+   "fieldname": "management_fee_percent",
    "fieldtype": "Percent",
    "label": "Management Fee"
   },
@@ -96,7 +97,24 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
-  }
+  },
+   {
+     "create": 1,
+     "email": 1,
+     "print": 1,
+     "read": 1,
+     "report": 1,
+     "role": "Property Manager",
+     "write": 1
+   },
+   {
+     "email": 1,
+     "export": 1,
+     "print": 1,
+     "read": 1,
+     "report": 1,
+     "role": "Accounts Manager"
+   }
  ],
  "row_format": "Dynamic",
  "rows_threshold_for_grid_search": 20,
