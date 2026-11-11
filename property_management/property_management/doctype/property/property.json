@@ -12,10 +12,15 @@
   "property_type",
   "address",
   "county",
-  "town-area",
+  "townarea",
   "status",
   "description",
-   "landlords"
+  "streetroad",
+  "estateneighbourhood",
+  "property_image",
+  "postal_code",
+  "amenities",
+  "landlords"
  ],
  "fields": [
   {
@@ -48,23 +53,10 @@
    "label": "Address",
    "reqd": 1
   },
-   {
-     "fieldname": "landlords",
-     "fieldtype": "Table",
-     "label": "Landlords",
-     "options": "Property Landlord",
-     "reqd": 1
-   },
   {
    "fieldname": "county",
    "fieldtype": "Data",
    "label": "County",
-   "reqd": 1
-  },
-  {
-   "fieldname": "town-area",
-   "fieldtype": "Data",
-   "label": "Town/Area",
    "reqd": 1
   },
   {
@@ -78,12 +70,51 @@
    "fieldname": "description",
    "fieldtype": "Text Editor",
    "label": "Description"
+  },
+  {
+   "fieldname": "property_image",
+   "fieldtype": "Attach Image",
+   "label": "Property Image"
+  },
+  {
+   "fieldname": "postal_code",
+   "fieldtype": "Data",
+   "label": "Postal Code"
+  },
+  {
+   "fieldname": "amenities",
+   "fieldtype": "Table",
+   "label": "Amenities",
+   "options": "Property Amenity"
+  },
+  {
+   "fieldname": "townarea",
+   "fieldtype": "Data",
+   "label": "Town/Area",
+   "reqd": 1
+  },
+  {
+   "fieldname": "streetroad",
+   "fieldtype": "Data",
+   "label": "Street/Road"
+  },
+  {
+   "fieldname": "estateneighbourhood",
+   "fieldtype": "Data",
+   "label": "Estate/Neighbourhood"
+  },
+  {
+   "fieldname": "landlords",
+   "fieldtype": "Table",
+   "label": "Landlords",
+   "options": "Property Landlord",
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-11-09 09:26:24.644706",
+ "modified": "2026-11-11 11:01:49.002465",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Property",
