@@ -2,7 +2,7 @@
  "actions": [],
  "allow_bulk_edit": 1,
  "allow_rename": 1,
- "autoname": "format:TN-{#####}",
+ "autoname": "TN-{#####}",
  "creation": "2026-11-09 10:40:37.871028",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -11,11 +11,15 @@
   "tenant_name",
   "phone_number",
   "email",
-   "customer",
-  "id_number_or_registration_number",
+  "id_number",
   "kra_pin",
   "kyc_documents",
-  "status"
+  "status",
+  "emergency_contact_name",
+  "emergency_contact_relationship",
+  "emergency_contact_phone",
+  "reference_name",
+  "reference_contact_phone"
  ],
  "fields": [
   {
@@ -23,7 +27,7 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Tenant Type",
-   "options": "Individual\nCompany",
+   "options": "individual\ncompany",
    "reqd": 1
   },
   {
@@ -43,15 +47,8 @@
   {
    "fieldname": "email",
    "fieldtype": "Data",
-    "options": "Email",
    "in_list_view": 1,
-   "label": "Email"
-  },
-  {
-   "fieldname": "id_number_or_registration_number",
-   "fieldtype": "Data",
-   "label": "ID Number or Registration Number",
-   "reqd": 1,
+   "label": "Email",
    "unique": 1
   },
   {
@@ -69,22 +66,53 @@
    "fieldtype": "Select",
    "label": "Status",
    "options": "Pending\nVerified\nInactive",
-    "default": "Pending",
    "reqd": 1
+  },
+  {
+   "fieldname": "id_number",
+   "fieldtype": "Data",
+   "label": "ID Number",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "emergency_contact_name",
+   "fieldtype": "Data",
+   "label": "Emergency Contact Name"
+  },
+  {
+   "fieldname": "emergency_contact_relationship",
+   "fieldtype": "Data",
+   "label": "Emergency Contact Relationship"
+  },
+  {
+   "fieldname": "emergency_contact_phone",
+   "fieldtype": "Data",
+   "label": "Emergency Contact Phone"
+  },
+  {
+   "fieldname": "reference_name",
+   "fieldtype": "Data",
+   "label": "Reference Name"
+  },
+  {
+   "fieldname": "reference_contact_phone",
+   "fieldtype": "Phone",
+   "label": "Reference Contact Phone"
   },
    {
      "fieldname": "customer",
      "fieldtype": "Link",
      "label": "ERPNext Customer",
      "options": "Customer",
-     "no_copy": 1,
-     "read_only": 1
+     "read_only": 1,
+     "no_copy": 1
    }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-11-10 09:35:48.871601",
+ "modified": "2026-11-11 15:02:09.488854",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Tenant",
