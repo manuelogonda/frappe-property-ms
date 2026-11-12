@@ -1,175 +1,263 @@
 {
-  "actions": [],
-  "allow_bulk_edit": 0,
-  "allow_rename": 0,
-  "creation": "2026-11-09 11:28:36.083533",
-  "doctype": "DocType",
-  "engine": "InnoDB",
-  "field_order": [
-    "lease_number",
-    "tenant",
-    "property",
-    "unit",
-    "management_agreement",
-    "status",
-    "start_date",
-    "end_date",
-    "monthly_rent",
-    "security_deposit",
-    "payment_due_day",
-    "notice_period",
-    "renewal_allowed",
-    "renewal_notes",
-    "special_terms",
-    "lease_document"
-  ],
-  "fields": [
-    {
-      "fieldname": "lease_number",
-      "fieldtype": "Data",
-      "in_list_view": 1,
-      "label": "Lease Number",
-      "reqd": 1
-    },
-    {
-      "fieldname": "tenant",
-      "fieldtype": "Link",
-      "in_list_view": 1,
-      "label": "Tenant",
-      "options": "Tenant",
-      "reqd": 1
-    },
-    {
-      "fieldname": "property",
-      "fieldtype": "Link",
-      "in_list_view": 1,
-      "label": "Property",
-      "options": "Property",
-      "reqd": 1
-    },
-    {
-      "fieldname": "unit",
-      "fieldtype": "Link",
-      "in_list_view": 1,
-      "label": "Unit",
-      "options": "Unit",
-      "reqd": 1
-    },
-    {
-      "fieldname": "management_agreement",
-      "fieldtype": "Link",
-      "label": "Management Agreement",
-      "options": "Management Agreement",
-      "reqd": 1
-    },
-    {
-      "fieldname": "status",
-      "fieldtype": "Select",
-      "label": "Status",
-      "default": "Draft",
-      "options": "Draft\nPending Approval\nActive\nExpired\nTerminated",
-      "reqd": 1
-    },
-    {
-      "fieldname": "start_date",
-      "fieldtype": "Date",
-      "label": "Start Date",
-      "reqd": 1
-    },
-    {
-      "fieldname": "end_date",
-      "fieldtype": "Date",
-      "label": "End Date",
-      "reqd": 1
-    },
-    {
-      "fieldname": "monthly_rent",
-      "fieldtype": "Currency",
-      "label": "Monthly Rent",
-      "reqd": 1
-    },
-    {
-      "fieldname": "security_deposit",
-      "fieldtype": "Currency",
-      "label": "Security Deposit",
-      "reqd": 1
-    },
-    {
-      "fieldname": "payment_due_day",
-      "fieldtype": "Int",
-      "label": "Payment Due Day",
-      "reqd": 1
-    },
-    {
-      "fieldname": "notice_period",
-      "fieldtype": "Int",
-      "label": "Notice Period (Days)"
-    },
-    {
-      "default": "0",
-      "fieldname": "renewal_allowed",
-      "fieldtype": "Check",
-      "label": "Renewal Allowed"
-    },
-    {
-      "fieldname": "renewal_notes",
-      "fieldtype": "Small Text",
-      "label": "Renewal Notes"
-    },
-    {
-      "fieldname": "special_terms",
-      "fieldtype": "Text Editor",
-      "label": "Special Terms"
-    },
-    {
-      "fieldname": "lease_document",
-      "fieldtype": "Attach",
-      "label": "Lease Document"
-    }
-  ],
-  "grid_page_length": 50,
-  "index_web_pages_for_search": 0,
-  "links": [],
-  "modified": "2026-11-10 10:49:41.576675",
-  "modified_by": "Administrator",
-  "module": "Property Management",
-  "name": "Lease",
-  "naming_rule": "Set by user",
-  "owner": "Administrator",
-  "permissions": [
-    {
-      "create": 1,
-      "delete": 1,
-      "email": 1,
-      "export": 1,
-      "print": 1,
-      "read": 1,
-      "report": 1,
-      "role": "System Manager",
-      "share": 1,
-      "write": 1
-    },
-    {
-      "create": 1,
-      "email": 1,
-      "print": 1,
-      "read": 1,
-      "report": 1,
-      "role": "Property Manager",
-      "write": 1
-    },
-    {
-      "email": 1,
-      "export": 1,
-      "print": 1,
-      "read": 1,
-      "report": 1,
-      "role": "Accounts Manager"
-    }
-  ],
-  "row_format": "Dynamic",
-  "rows_threshold_for_grid_search": 20,
-  "sort_field": "creation",
-  "sort_order": "DESC",
-  "states": []
+ "actions": [],
+ "creation": "2026-11-09 11:28:36.083533",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "lease_number",
+  "tenant",
+  "property",
+  "unit",
+  "management_agreement",
+  "status",
+  "start_date",
+  "end_date",
+  "rent_amount",
+  "security_deposit",
+  "payment_due_day",
+  "notice_period",
+  "renewal_allowed",
+  "renewal_notes",
+  "special_terms",
+  "lease_document",
+  "payment_frequency",
+  "previous_lease",
+  "renewal_status",
+  "notice_served_date",
+  "notice_effective_date",
+  "notice_reason",
+  "termination_date",
+  "termination_reason",
+  "handover_status",
+  "handover_date",
+  "handover_notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "lease_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Lease Number",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tenant",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Tenant",
+   "options": "Tenant",
+   "reqd": 1
+  },
+  {
+   "fieldname": "property",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Property",
+   "options": "Property",
+   "reqd": 1
+  },
+  {
+   "fieldname": "unit",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Unit",
+   "options": "Unit",
+   "reqd": 1
+  },
+  {
+   "fieldname": "management_agreement",
+   "fieldtype": "Link",
+   "label": "Management Agreement",
+   "options": "Management Agreement",
+   "reqd": 1
+  },
+  {
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Draft\nPending Approval\nActive\nExpired\nTerminated",
+   "reqd": 1
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Start Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "End Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "security_deposit",
+   "fieldtype": "Currency",
+   "label": "Security Deposit",
+   "reqd": 1
+  },
+  {
+   "fieldname": "payment_due_day",
+   "fieldtype": "Int",
+   "label": "Payment Due Day",
+   "reqd": 1
+  },
+  {
+   "fieldname": "notice_period",
+   "fieldtype": "Int",
+   "label": "Notice Period (Days)"
+  },
+  {
+   "default": "0",
+   "fieldname": "renewal_allowed",
+   "fieldtype": "Check",
+   "label": "Renewal Allowed"
+  },
+  {
+   "fieldname": "renewal_notes",
+   "fieldtype": "Small Text",
+   "label": "Renewal Notes"
+  },
+  {
+   "fieldname": "special_terms",
+   "fieldtype": "Text Editor",
+   "label": "Special Terms"
+  },
+  {
+   "fieldname": "lease_document",
+   "fieldtype": "Attach",
+   "label": "Lease Document"
+  },
+  {
+   "fieldname": "rent_amount",
+   "fieldtype": "Currency",
+   "label": "Rent Amount",
+   "reqd": 1
+  },
+  {
+   "fieldname": "payment_frequency",
+   "fieldtype": "Select",
+   "label": "Payment Frequency",
+   "options": "Monthly\nQuarterly\nAnnually"
+  },
+  {
+   "fieldname": "previous_lease",
+   "fieldtype": "Link",
+   "label": "Previous Lease",
+   "options": "Lease"
+  },
+  {
+   "fieldname": "renewal_status",
+   "fieldtype": "Select",
+   "label": "Renewal Status",
+   "options": "Not Applicable\nPending\nApproved\nRejected"
+  },
+  {
+   "fieldname": "notice_served_date",
+   "fieldtype": "Date",
+   "label": "Notice Served Date"
+  },
+  {
+   "fieldname": "notice_effective_date",
+   "fieldtype": "Date",
+   "label": "Notice Effective Date"
+  },
+  {
+   "fieldname": "notice_reason",
+   "fieldtype": "Small Text",
+   "label": "Notice Reason"
+  },
+  {
+   "fieldname": "termination_date",
+   "fieldtype": "Date",
+   "label": "Termination Date"
+  },
+  {
+   "fieldname": "termination_reason",
+   "fieldtype": "Small Text",
+   "label": "Termination Reason"
+  },
+  {
+   "fieldname": "handover_status",
+   "fieldtype": "Select",
+   "label": "HandOver Status",
+   "options": "Not Started\nIn Progress\nCompleted"
+  },
+  {
+   "fieldname": "handover_date",
+   "fieldtype": "Date",
+   "label": "HandOver Date"
+  },
+  {
+   "fieldname": "handover_notes",
+   "fieldtype": "Small Text",
+   "label": "HandOver Notes"
+  },
+   {"fieldname": "lease_charges",
+     "fieldtype": "Table",
+     "label": "Agreed Charges",
+     "options": "Lease Charge"
+   },
+   {"fieldname": "rent_reviews",
+     "fieldtype": "Table",
+     "label": "Rent Reviews",
+     "options": "Lease Rent Review"
+   },
+   {"fieldname": "approved_by",
+     "fieldtype": "Link",
+     "label": "Approved By",
+     "options": "User",
+     "read_only": 1
+   },
+   {"fieldname": "approved_on",
+     "fieldtype": "Datetime",
+     "label": "Approved On",
+     "read_only": 1
+   }
+ ],
+ "grid_page_length": 50,
+ "links": [],
+ "modified": "2026-11-12 08:55:24.626975",
+ "modified_by": "Administrator",
+ "module": "Property Management",
+ "name": "Lease",
+ "naming_rule": "Set by user",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Property Manager",
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts Manager"
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
 }
