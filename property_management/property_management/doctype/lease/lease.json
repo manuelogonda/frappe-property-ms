@@ -30,7 +30,12 @@
   "termination_reason",
   "handover_status",
   "handover_date",
-  "handover_notes"
+  "handover_notes",
+  "lease_charges",
+  "rent_reviews",
+  "approved_by",
+  "approved_on",
+  "rent_schedule"
  ],
  "fields": [
   {
@@ -194,31 +199,41 @@
    "fieldtype": "Small Text",
    "label": "HandOver Notes"
   },
-   {"fieldname": "lease_charges",
-     "fieldtype": "Table",
-     "label": "Agreed Charges",
-     "options": "Lease Charge"
-   },
-   {"fieldname": "rent_reviews",
-     "fieldtype": "Table",
-     "label": "Rent Reviews",
-     "options": "Lease Rent Review"
-   },
-   {"fieldname": "approved_by",
-     "fieldtype": "Link",
-     "label": "Approved By",
-     "options": "User",
-     "read_only": 1
-   },
-   {"fieldname": "approved_on",
-     "fieldtype": "Datetime",
-     "label": "Approved On",
-     "read_only": 1
-   }
+  {
+   "fieldname": "lease_charges",
+   "fieldtype": "Table",
+   "label": "Agreed Charges",
+   "options": "Lease Charge"
+  },
+  {
+   "fieldname": "rent_reviews",
+   "fieldtype": "Table",
+   "label": "Rent Reviews",
+   "options": "Lease Rent Review"
+  },
+  {
+   "fieldname": "approved_by",
+   "fieldtype": "Link",
+   "label": "Approved By",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "approved_on",
+   "fieldtype": "Datetime",
+   "label": "Approved On",
+   "read_only": 1
+  },
+  {
+   "fieldname": "rent_schedule",
+   "fieldtype": "Table",
+   "label": "Rent Schedule",
+   "options": "Lease Rent Schedule"
+  }
  ],
  "grid_page_length": 50,
  "links": [],
- "modified": "2026-11-12 08:55:24.626975",
+ "modified": "2026-11-12 11:01:18.863152",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Lease",

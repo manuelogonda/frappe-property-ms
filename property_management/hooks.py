@@ -277,3 +277,10 @@ app_license = "mit"
 # List of apps whose translatable strings should be excluded from this app's translations.
 # ignore_translatable_strings_from = []
 
+scheduler_events = {
+	"daily": [
+		"property_management.tasks.expire_ended_leases",
+		"property_management.tasks.generate_due_invoices",
+	],
+}
+
