@@ -1,0 +1,115 @@
+{
+ "actions": [],
+ "allow_bulk_edit": 1,
+ "creation": "2026-11-13 07:14:58.192576",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "check",
+  "monthly_lead_days",
+  "quaterly_lead_days",
+  "grace_period_days",
+  "notice_1_day",
+  "notice_2_day",
+  "notice_3_day",
+  "quiet_start_hour",
+  "quiet_end_hour",
+  "paybill_number",
+  "sms_enabled"
+ ],
+ "fields": [
+  {
+   "default": "1",
+   "fieldname": "check",
+   "fieldtype": "Check",
+   "label": "Enabled"
+  },
+  {
+   "default": "7",
+   "fieldname": "monthly_lead_days",
+   "fieldtype": "Int",
+   "label": "Monthly Lead Days"
+  },
+  {
+   "default": "60",
+   "fieldname": "quaterly_lead_days",
+   "fieldtype": "Int",
+   "label": "Quaterly Lead Days"
+  },
+  {
+   "default": "3",
+   "fieldname": "grace_period_days",
+   "fieldtype": "Int",
+   "label": "Grace period Days"
+  },
+  {
+   "default": "4",
+   "fieldname": "notice_1_day",
+   "fieldtype": "Int",
+   "label": "Notice 1 Day"
+  },
+  {
+   "default": "14",
+   "fieldname": "notice_2_day",
+   "fieldtype": "Int",
+   "label": "Notice 2 Day"
+  },
+  {
+   "default": "30",
+   "fieldname": "notice_3_day",
+   "fieldtype": "Int",
+   "label": "Notice 3 Day"
+  },
+  {
+   "default": "8",
+   "fieldname": "quiet_start_hour",
+   "fieldtype": "Int",
+   "label": "Quiet Start Hour"
+  },
+  {
+   "default": "18",
+   "fieldname": "quiet_end_hour",
+   "fieldtype": "Int",
+   "label": "Quiet End Hour"
+  },
+  {
+   "fieldname": "paybill_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Paybill Number",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "sms_enabled",
+   "fieldtype": "Check",
+   "label": "SMS Enabled"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-11-13 07:25:38.886928",
+ "modified_by": "Administrator",
+ "module": "Property Management",
+ "name": "Reminder Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

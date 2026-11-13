@@ -282,5 +282,9 @@ scheduler_events = {
 		"property_management.tasks.expire_ended_leases",
 		"property_management.tasks.generate_due_invoices",
 	],
+	"hourly": [
+		"property_management.reminders.send_due_reminders",
+	],
 }
+
 

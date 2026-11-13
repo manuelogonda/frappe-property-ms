@@ -9,6 +9,7 @@ from datetime import date
 import frappe
 from frappe import _
 from frappe.utils import add_days, add_months, cint, date_diff, flt, get_last_day, getdate, today
+from property_management.reminders import issue_lead_days
 
 RENT_ITEM = "Monthly Rent"  # DECISION: item used for rent lines. Must exist with an income account.
 HORIZON_MONTHS = 12  # DECISION: how far ahead a lease with no end date is scheduled.
@@ -184,7 +185,7 @@ def invoice_line(lease, line, is_first):
 			"doctype": "Sales Invoice",
 			"customer": customer,
 			"company": default_company(),
-			"posting_date": getdate(line.period_start),
+			"posting_date": getdate(today()),
 			"due_date": getdate(line.due_date),
 			"lease": lease.name,
 			"lease_period_key": key,
@@ -198,18 +199,22 @@ def invoice_line(lease, line, is_first):
 
 
 def invoice_due_lines(lease):
-	"""Invoice every pending schedule line whose due date has arrived."""
 	if lease.status != "Active":
 		return  # Rule 10: no invoices for expired or terminated leases.
 
+	lead = issue_lead_days(lease.payment_frequency)
+	if lead is None:
+		return  # Annually: timing not yet decided, so nothing is billed.
+
 	today_date = getdate(today())
 	for idx, line in enumerate(lease.get("rent_schedule") or []):
-		if line.status != "Pending" or getdate(line.due_date) > today_date:
+		if line.status != "Pending":
 			continue
+		if today_date < add_days(getdate(line.due_date), -lead):
+			continue  # Too early to issue.
 		invoice_name = invoice_line(lease, line, is_first=(idx == 0))
 		frappe.db.set_value(
-			"Lease Rent Schedule",
-			line.name,
+			"Lease Rent Schedule", line.name,
 			{"sales_invoice": invoice_name, "status": "Invoiced"},
 			update_modified=False,
 		)
