@@ -6,18 +6,87 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "section_break_saho"
+  "reminder_key",
+  "reminder_type",
+  "notice_number",
+  "sales_invoce",
+  "lease",
+  "tenant",
+  "channel",
+  "recipient",
+  "status",
+  "attempts",
+  "sent_at"
  ],
  "fields": [
   {
-   "fieldname": "section_break_saho",
-   "fieldtype": "Section Break"
+   "fieldname": "reminder_key",
+   "fieldtype": "Data",
+   "label": "Reminder Key",
+   "read_only": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "reminder_type",
+   "fieldtype": "Select",
+   "label": "Reminder Type",
+   "options": "Rent Reminder\nOverdue Notice"
+  },
+  {
+   "fieldname": "notice_number",
+   "fieldtype": "Int",
+   "label": "Notice Number"
+  },
+  {
+   "fieldname": "sales_invoce",
+   "fieldtype": "Link",
+   "label": "Sales Invoce",
+   "options": "Sales Invoice"
+  },
+  {
+   "fieldname": "lease",
+   "fieldtype": "Link",
+   "label": "Lease",
+   "options": "Lease"
+  },
+  {
+   "fieldname": "tenant",
+   "fieldtype": "Link",
+   "label": "Tenant",
+   "options": "Tenant"
+  },
+  {
+   "fieldname": "channel",
+   "fieldtype": "Select",
+   "label": "Channel",
+   "options": "Email\nSMS"
+  },
+  {
+   "fieldname": "recipient",
+   "fieldtype": "Data",
+   "label": "Recipient"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Pending\nSent\nFailed"
+  },
+  {
+   "fieldname": "attempts",
+   "fieldtype": "Int",
+   "label": "Attempts"
+  },
+  {
+   "fieldname": "sent_at",
+   "fieldtype": "Datetime",
+   "label": "Sent At"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-11-13 07:30:36.108220",
+ "modified": "2026-11-13 07:46:05.212629",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Reminder Log",

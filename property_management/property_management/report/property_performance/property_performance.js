@@ -1,0 +1,7 @@
+frappe.query_reports["Property Performance"] = {
+	filters: [
+		{ fieldname: "from_date", label: __("From"), fieldtype: "Date", default: frappe.datetime.year_start(), reqd: 1 },
+		{ fieldname: "to_date", label: __("To"), fieldtype: "Date", default: frappe.datetime.get_today(), reqd: 1 },
+		{ fieldname: "property", label: __("Property"), fieldtype: "Link", options: "Property" },
+	],
+};
