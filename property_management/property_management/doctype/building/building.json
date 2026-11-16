@@ -1,7 +1,5 @@
 {
  "actions": [],
- "allow_bulk_edit": 0,
- "allow_rename": 0,
  "autoname": "{property}-{building_code}",
  "creation": "2026-11-09 09:45:14.850538",
  "doctype": "DocType",
@@ -33,6 +31,7 @@
    "fieldname": "property",
    "fieldtype": "Link",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Property",
    "options": "Property",
    "reqd": 1
@@ -48,9 +47,11 @@
    "label": "Description"
   },
   {
+   "default": "Active",
    "fieldname": "status",
    "fieldtype": "Select",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Status",
    "options": "Active\nInactive",
    "reqd": 1
@@ -59,7 +60,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-11-09 10:01:12.670296",
+ "modified": "2026-11-16 12:02:15.594277",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Building",
@@ -78,23 +79,32 @@
    "share": 1,
    "write": 1
   },
-   {
-     "create": 1,
-     "email": 1,
-     "print": 1,
-     "read": 1,
-     "report": 1,
-     "role": "Property Manager",
-     "write": 1
-   },
-   {
-     "email": 1,
-     "export": 1,
-     "print": 1,
-     "read": 1,
-     "report": 1,
-     "role": "Accounts Manager"
-   }
+  {
+   "create": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Property Manager",
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts Manager"
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Maintenance Staff",
+   "share": 1
+  }
  ],
  "row_format": "Dynamic",
  "rows_threshold_for_grid_search": 20,
