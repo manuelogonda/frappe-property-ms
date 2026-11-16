@@ -43,12 +43,14 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Lease Number",
-   "reqd": 1
+   "reqd": 1,
+   "unique": 1
   },
   {
    "fieldname": "tenant",
    "fieldtype": "Link",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Tenant",
    "options": "Tenant",
    "reqd": 1
@@ -57,6 +59,7 @@
    "fieldname": "property",
    "fieldtype": "Link",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Property",
    "options": "Property",
    "reqd": 1
@@ -65,6 +68,7 @@
    "fieldname": "unit",
    "fieldtype": "Link",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Unit",
    "options": "Unit",
    "reqd": 1
@@ -80,6 +84,8 @@
    "default": "Draft",
    "fieldname": "status",
    "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Status",
    "options": "Draft\nPending Approval\nActive\nExpired\nTerminated",
    "reqd": 1
@@ -91,10 +97,10 @@
    "reqd": 1
   },
   {
+   "description": "Leave blank for a periodic tenancy",
    "fieldname": "end_date",
    "fieldtype": "Date",
-   "label": "End Date",
-   "reqd": 1
+   "label": "End Date"
   },
   {
    "fieldname": "security_deposit",
@@ -103,6 +109,7 @@
    "reqd": 1
   },
   {
+   "description": "Between 1 and 28",
    "fieldname": "payment_due_day",
    "fieldtype": "Int",
    "label": "Payment Due Day",
@@ -153,6 +160,7 @@
    "options": "Lease"
   },
   {
+   "default": "Not Applicable",
    "fieldname": "renewal_status",
    "fieldtype": "Select",
    "label": "Renewal Status",
@@ -184,6 +192,7 @@
    "label": "Termination Reason"
   },
   {
+   "default": "Not Started",
    "fieldname": "handover_status",
    "fieldtype": "Select",
    "label": "HandOver Status",
@@ -233,7 +242,7 @@
  ],
  "grid_page_length": 50,
  "links": [],
- "modified": "2026-11-12 11:01:18.863152",
+ "modified": "2026-11-16 14:21:58.616290",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Lease",
