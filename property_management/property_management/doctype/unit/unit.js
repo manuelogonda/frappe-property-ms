@@ -20,19 +20,10 @@ frappe.ui.form.on("Unit", {
 			frm.add_custom_button(__("Building"), () =>
 				frappe.set_route("Form", "Building", frm.doc.building), __("View"));
 		}
-
-		// Lock the fields that names and leases depend on, once leases exist.
-		frappe.db.count("Lease", { unit: frm.doc.name }).then((count) => {
-			if (count > 0) {
-				["unit_code", "property", "building"].forEach((f) => frm.set_df_property(f, "read_only", 1));
-				frm.dashboard.set_headline(
-					__("This unit has {0} lease(s). Its code, property and building are locked.", [count])
-				);
-			}
-		});
 	},
 
 	async building(frm) {
+		// Rule 16: choosing a building sets the property to match it.
 		if (!frm.doc.building) return;
 		const { message } = await frappe.db.get_value("Building", frm.doc.building, "property");
 		if (message && message.property && frm.doc.property !== message.property) {
@@ -41,7 +32,7 @@ frappe.ui.form.on("Unit", {
 	},
 
 	async property(frm) {
-		// Clear the building if it belongs to a different property.
+		// If the chosen building belongs to another property, clear it.
 		if (!frm.doc.building || !frm.doc.property) return;
 		const { message } = await frappe.db.get_value("Building", frm.doc.building, "property");
 		if (message && message.property !== frm.doc.property) {
@@ -57,12 +48,14 @@ frappe.ui.form.on("Unit", {
 	},
 
 	monthly_rent(frm) {
+		// Rule 18: warning only.
 		if (frm.doc.monthly_rent !== undefined && frm.doc.monthly_rent <= 0) {
 			frappe.show_alert({ message: __("Monthly rent must be greater than zero."), indicator: "red" });
 		}
 	},
 
 	status(frm) {
+		// Rule 19: Occupied is set through the lease, not by hand.
 		if (frm.doc.status === "Occupied") {
 			frappe.msgprint(__("Occupied is set automatically when a lease becomes Active. Choose another status."));
 		}

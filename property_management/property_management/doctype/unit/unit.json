@@ -1,7 +1,5 @@
 {
  "actions": [],
- "allow_bulk_edit": 0,
- "allow_rename": 0,
  "creation": "2026-11-09 10:19:05.755508",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -31,13 +29,14 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Unit Code",
+   "read_only_depends_on": "eval:!doc.__islocal;",
    "reqd": 1
   },
   {
    "fieldname": "property",
    "fieldtype": "Link",
-    "in_list_view": 1,
-    "in_standard_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Property",
    "options": "Property",
    "reqd": 1
@@ -45,58 +44,65 @@
   {
    "fieldname": "building",
    "fieldtype": "Link",
-    "in_list_view": 1,
-    "in_standard_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Building",
-   "options": "Building",
-   "reqd": 1
+   "options": "Building"
   },
   {
    "fieldname": "unit_type",
    "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Unit Type",
-    "in_list_view": 1,
-    "in_standard_filter": 1,
    "options": "Apartment\nHouse\nShop\nOffice\nWarehouse",
    "reqd": 1
   },
   {
    "fieldname": "floor_number",
    "fieldtype": "Int",
-   "label": "Floor Number"
+   "label": "Floor Number",
+   "non_negative": 1
   },
   {
    "fieldname": "bedrooms",
    "fieldtype": "Int",
-   "label": "Bedrooms"
+   "label": "Bedrooms",
+   "non_negative": 1
   },
   {
    "fieldname": "bathrooms",
    "fieldtype": "Int",
-   "label": "Bathrooms"
+   "label": "Bathrooms",
+   "non_negative": 1
   },
   {
    "fieldname": "monthly_rent",
    "fieldtype": "Currency",
    "label": "Monthly Rent",
+   "non_negative": 1,
    "reqd": 1
   },
   {
    "fieldname": "security_deposit",
    "fieldtype": "Currency",
-   "label": "Security Deposit"
+   "label": "Security Deposit",
+   "non_negative": 1
   },
   {
+   "default": "Vacant",
    "fieldname": "status",
    "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Status",
-   "options": "vacant\noccupied\nReserved\nmaintenance\ninactive"
+   "options": "Vacant\nOccupied\nReserved\nMaintenance\nInactive"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-11-09 10:27:17.823266",
+ "modified": "2026-11-16 12:39:20.861574",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Unit",
@@ -114,23 +120,32 @@
    "share": 1,
    "write": 1
   },
-   {
-     "create": 1,
-     "email": 1,
-     "print": 1,
-     "read": 1,
-     "report": 1,
-     "role": "Property Manager",
-     "write": 1
-   },
-   {
-     "email": 1,
-     "export": 1,
-     "print": 1,
-     "read": 1,
-     "report": 1,
-     "role": "Accounts Manager"
-   }
+  {
+   "create": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Property Manager",
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts Manager"
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Maintenance Staff",
+   "share": 1
+  }
  ],
  "row_format": "Dynamic",
  "rows_threshold_for_grid_search": 20,
