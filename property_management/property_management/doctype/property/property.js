@@ -7,6 +7,9 @@ frappe.ui.form.on("Property", {
 		frm.page.set_indicator(frm.doc.status, colours[frm.doc.status] || "gray");
 
 		if (!frm.is_new()) {
+			// Rule 3: the code is locked once the property exists.
+			frm.set_df_property("property_code", "read_only", 1);
+
 			frm.add_custom_button(__("Buildings"), () =>
 				frappe.set_route("List", "Building", { property: frm.doc.name }), __("View"));
 			frm.add_custom_button(__("Units"), () =>
@@ -25,13 +28,14 @@ frappe.ui.form.on("Property", {
 	},
 
 	status(frm) {
+		// Rule 7: Active needs a landlord. The server also checks the agreement.
 		if (frm.doc.status === "Active" && !(frm.doc.landlords || []).length) {
 			frappe.msgprint(__("Add at least one landlord before setting this property to Active."));
 		}
 	},
 
 	landlords_add(frm, cdt, cdn) {
-		// The first landlord added is the primary contact by default.
+		// The first landlord becomes the primary contact by default.
 		if ((frm.doc.landlords || []).length === 1) {
 			frappe.model.set_value(cdt, cdn, "is_primary_contact", 1);
 		}
@@ -48,7 +52,7 @@ frappe.ui.form.on("Property", {
 			frm.dashboard.clear_headline();
 			return;
 		}
-		const total = rows.reduce((sum, r) => sum + (flt(r.share_percent) || 0), 0);
+		const total = rows.reduce((sum, r) => sum + (parseFloat(r.share_percentage) || 0), 0);
 		const primaries = rows.filter((r) => r.is_primary_contact).length;
 		const ok = Math.abs(total - 100) < 0.001 && primaries === 1;
 		frm.dashboard.set_headline(
@@ -61,7 +65,7 @@ frappe.ui.form.on("Property", {
 	validate(frm) {
 		const rows = frm.doc.landlords || [];
 		if (!rows.length) return;
-		const total = rows.reduce((sum, r) => sum + (flt(r.share_percent) || 0), 0);
+		const total = rows.reduce((sum, r) => sum + (parseFloat(r.share_percentage) || 0), 0);
 		if (Math.abs(total - 100) > 0.001) {
 			frappe.throw(__("Landlord shares must total 100%. Current total is {0}%.", [total.toFixed(2)]));
 		}
@@ -80,11 +84,12 @@ frappe.ui.form.on("Property Landlord", {
 		frm.trigger("show_share_summary");
 	},
 
-	share_percent(frm) {
+	share_percentage(frm) {
 		frm.trigger("show_share_summary");
 	},
 
 	async landlord(frm, cdt, cdn) {
+		// Rule 6 warning only. The child controller blocks the save.
 		const row = locals[cdt][cdn];
 		if (!row.landlord) return;
 		const { message } = await frappe.db.get_value("Landlord", row.landlord, "status");

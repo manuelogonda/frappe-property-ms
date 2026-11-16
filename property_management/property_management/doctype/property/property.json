@@ -12,15 +12,16 @@
   "property_type",
   "address",
   "county",
-  "townarea",
+  "town_area",
   "status",
   "description",
-  "streetroad",
-  "estateneighbourhood",
+  "street_road",
+  "estate_neighbourhood",
   "property_image",
   "postal_code",
   "amenities",
-  "landlords"
+  "landlords",
+  "documents"
  ],
  "fields": [
   {
@@ -60,6 +61,7 @@
    "reqd": 1
   },
   {
+   "default": "Draft",
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
@@ -88,33 +90,40 @@
    "options": "Property Amenity"
   },
   {
-   "fieldname": "townarea",
+   "fieldname": "landlords",
+   "fieldtype": "Table",
+   "label": "Landlords",
+   "options": "Property Landlord",
+   "reqd": 1
+  },
+  {
+   "fieldname": "town_area",
    "fieldtype": "Data",
    "label": "Town/Area",
    "reqd": 1
   },
   {
-   "fieldname": "streetroad",
+   "fieldname": "street_road",
    "fieldtype": "Data",
    "label": "Street/Road"
   },
   {
-   "fieldname": "estateneighbourhood",
+   "fieldname": "estate_neighbourhood",
    "fieldtype": "Data",
    "label": "Estate/Neighbourhood"
   },
   {
-   "fieldname": "landlords",
+   "fieldname": "documents",
    "fieldtype": "Table",
-   "label": "Landlords",
-   "options": "Property Landlord",
+   "label": "Documents",
+   "options": "Property Document",
    "reqd": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-11-11 11:01:49.002465",
+ "modified": "2026-11-16 11:40:34.392830",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Property",
@@ -132,6 +141,35 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accountant",
+   "share": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Property Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Maintenance Staff",
+   "share": 1
   }
  ],
  "row_format": "Dynamic",
