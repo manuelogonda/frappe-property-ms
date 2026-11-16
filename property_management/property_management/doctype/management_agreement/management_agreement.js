@@ -22,7 +22,7 @@ frappe.ui.form.on("Management Agreement", {
 	},
 
 	fee_structure(frm) {
-		// Clear the fee that does not apply, so the record holds one fee only.
+		// Rule 35: clear the fee that does not apply.
 		if (frm.doc.fee_structure === "Percentage") {
 			frm.set_value("fixed_management_fee", 0);
 		} else if (frm.doc.fee_structure === "Fixed Amount") {
@@ -31,13 +31,14 @@ frappe.ui.form.on("Management Agreement", {
 	},
 
 	management_fee_percent(frm) {
-		if (frm.doc.management_fee_percent && (frm.doc.management_fee_percent <= 0 || frm.doc.management_fee_percent > 100)) {
+		const pct = frm.doc.management_fee_percent;
+		if (pct && (pct <= 0 || pct > 100)) {
 			frappe.show_alert({ message: __("Management fee must be above 0% and at most 100%."), indicator: "red" });
 		}
 	},
 
 	fixed_management_fee(frm) {
-		if (frm.doc.fixed_management_fee !== undefined && frm.doc.fixed_management_fee <= 0 && frm.doc.fee_structure === "Fixed Amount") {
+		if (frm.doc.fee_structure === "Fixed Amount" && frm.doc.fixed_management_fee <= 0) {
 			frappe.show_alert({ message: __("Fixed management fee must be greater than zero."), indicator: "red" });
 		}
 	},
@@ -51,19 +52,18 @@ frappe.ui.form.on("Management Agreement", {
 	},
 
 	check_dates(frm) {
+		// Rule 34.
 		if (frm.doc.start_date && frm.doc.end_date && frm.doc.end_date <= frm.doc.start_date) {
 			frappe.show_alert({ message: __("End date must be later than the start date."), indicator: "red" });
 		}
 	},
 
 	status(frm) {
-		if (frm.doc.status !== "Active") return;
-
-		if (!frm.doc.agreement_document) {
-			frappe.msgprint(__("Attach the signed agreement before setting the status to Active."));
-		}
-		if (frm.doc.end_date && frm.doc.end_date < frappe.datetime.get_today()) {
-			frappe.msgprint(__("The end date has passed. This agreement should be Expired, not Active."));
+		// Rule 38: warning only. The server blocks the save.
+		if (frm.doc.status === "Active") {
+			if (!frm.doc.agreement_document) {
+				frappe.msgprint(__("Attach the signed agreement before setting the status to Active."));
+			}
 		}
 	},
 });

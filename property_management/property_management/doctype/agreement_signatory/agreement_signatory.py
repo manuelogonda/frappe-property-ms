@@ -8,13 +8,19 @@ from frappe.model.document import Document
 from frappe.utils import getdate, today
 
 
+import frappe
+from frappe import _
+from frappe.model.document import Document
+from frappe.utils import getdate, today
+
+
 class AgreementSignatory(Document):
 	def validate(self):
 		self.validate_landlord_verified()
 		self.validate_signing_date()
 
 	def validate_landlord_verified(self):
-		# Only a verified landlord can give authority to manage their property.
+		# Rule 39: only a Verified landlord can give authority to manage a property.
 		status = frappe.db.get_value("Landlord", self.landlord, "status")
 		if status != "Verified":
 			frappe.throw(
@@ -24,5 +30,6 @@ class AgreementSignatory(Document):
 			)
 
 	def validate_signing_date(self):
+		# A signature cannot be dated in the future.
 		if self.signing_date and getdate(self.signing_date) > getdate(today()):
 			frappe.throw(_("The signing date for {0} cannot be in the future.").format(self.landlord))
