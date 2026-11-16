@@ -11,7 +11,7 @@
   "landlord_name",
   "mpesa_phone_number",
   "email",
-  "id_number",
+  "id_number_or_registration_number",
   "kra_pin",
   "address",
   "kyc_documents",
@@ -20,13 +20,15 @@
   "status",
   "bank_account_name",
   "bank_branch",
-  "preferred_payment_method"
+  "preferred_payment_method",
+  "phone"
  ],
  "fields": [
   {
    "fieldname": "landlord_type",
    "fieldtype": "Select",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Landlord Type",
    "options": "Individual\nCompany",
    "reqd": 1
@@ -50,10 +52,12 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Email",
+   "options": "Email",
    "reqd": 1,
    "unique": 1
   },
   {
+   "description": "Format: one letter, nine digits, one letter",
    "fieldname": "kra_pin",
    "fieldtype": "Data",
    "label": "KRA PIN",
@@ -75,47 +79,60 @@
    "fieldname": "bank_account_number",
    "fieldtype": "Password",
    "label": "Bank Account Number",
+   "permlevel": 1,
    "reqd": 1
   },
   {
    "fieldname": "bank_name",
    "fieldtype": "Data",
-   "label": "Bank Name"
+   "label": "Bank Name",
+   "permlevel": 1
   },
   {
+   "default": "Pending",
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
-   "options": "Pending\nVerified\nRejected\nInactive"
-  },
-  {
-   "fieldname": "id_number",
-   "fieldtype": "Data",
-   "label": "ID Number",
-   "reqd": 1,
-   "unique": 1
+   "options": "Pending\nVerified\nRejected\nInactive",
+   "reqd": 1
   },
   {
    "fieldname": "bank_account_name",
    "fieldtype": "Data",
-   "label": "Bank Account Name"
+   "label": "Bank Account Name",
+   "permlevel": 1
   },
   {
    "fieldname": "bank_branch",
    "fieldtype": "Data",
-   "label": "Bank Branch"
+   "label": "Bank Branch",
+   "permlevel": 1
   },
   {
    "fieldname": "preferred_payment_method",
    "fieldtype": "Select",
    "label": "Preferfed Payment Method",
-   "options": "M-PESA\nBank Transfer"
+   "options": "M-PESA\nBank Transfer",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "id_number_or_registration_number",
+   "fieldtype": "Data",
+   "label": "ID Number / Registration Number",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "phone",
+   "fieldtype": "Phone",
+   "label": "Phone",
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-11-11 13:05:40.036687",
+ "modified": "2026-11-16 13:03:16.478119",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Landlord",
@@ -131,6 +148,27 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Property Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accountant",
    "share": 1,
    "write": 1
   }
