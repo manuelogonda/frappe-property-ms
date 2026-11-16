@@ -11,6 +11,12 @@ frappe.ui.form.on("Tenant", {
 			frm.add_custom_button(__("ERPNext Customer"), () =>
 				frappe.set_route("Form", "Customer", frm.doc.customer), __("View"));
 		}
+		if (!frm.is_new()) {
+			frm.add_custom_button(__("Leases"), () =>
+				frappe.set_route("List", "Lease", { tenant: frm.doc.name }), __("View"));
+		}
+		// Rule 30: the tenant type is locked once a customer exists.
+		frm.set_df_property("tenant_type", "read_only", frm.doc.customer ? 1 : 0);
 	},
 
 	tenant_type(frm) {
@@ -35,11 +41,20 @@ frappe.ui.form.on("Tenant", {
 		}
 	},
 
+	email(frm) {
+		if (frm.doc.email) {
+			frm.set_value("email", frm.doc.email.trim().toLowerCase());
+		}
+	},
+
 	status(frm) {
+		// Rule 29: warning only. The server blocks the save.
 		if (frm.doc.status === "Verified") {
 			const missing = [];
 			if (!frm.doc.kyc_documents) missing.push(__("KYC documents"));
 			if (!frm.doc.kra_pin) missing.push(__("KRA PIN"));
+			if (!frm.doc.consent_given) missing.push(__("consent"));
+			if (!(frm.doc.emergency_contacts || []).length) missing.push(__("an emergency contact"));
 			if (missing.length) {
 				frappe.msgprint(__("Before this tenant can be Verified, add: {0}.", [missing.join(", ")]));
 			}

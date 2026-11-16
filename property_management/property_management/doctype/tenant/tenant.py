@@ -7,22 +7,20 @@ import re
 import frappe
 from frappe import _
 from frappe.model.document import Document
+from frappe.utils import flt
 
 KRA_PIN_PATTERN = re.compile(r"^[A-Z]\d{9}[A-Z]$")
 
 
 class Tenant(Document):
-	def autoname(self):
-		# Naming rule is Expression: TN-00001, TN-00002, ...
-		pass
-
 	def validate(self):
 		self.clean_fields()
-		self.validate_kra_pin()
-		self.validate_id_number()
-		self.validate_email_unique()
-		self.validate_verification()
-		self.validate_tenant_type_change()
+		self.validate_kra_pin()                 # Rule 29 supporting check
+		self.validate_unique_identifier()       # Rule 27
+		self.validate_unique_email()            # Rule 28
+		self.validate_emergency_contacts()
+		self.validate_verification()            # Rule 29
+		self.validate_tenant_type_change()      # Rule 30
 
 	def clean_fields(self):
 		self.tenant_name = (self.tenant_name or "").strip()
@@ -37,34 +35,45 @@ class Tenant(Document):
 		if not KRA_PIN_PATTERN.match(self.kra_pin):
 			frappe.throw(_("KRA PIN must be one letter, nine digits, and one letter."))
 
-	def validate_id_number(self):
-		# The same person or company cannot be registered twice.
+	def validate_unique_identifier(self):
 		existing = frappe.db.get_value(
 			"Tenant",
 			{"id_number_or_registration_number": self.id_number_or_registration_number, "name": ["!=", self.name or ""]},
 			"name",
 		)
 		if existing:
-			frappe.throw(_("A tenant with this ID or registration number already exists: {0}").format(existing))
+			frappe.throw(_("A tenant with this ID or registration number already exists: {0}.").format(existing))
 
-	def validate_email_unique(self):
-		# Email is optional, so only check when one is entered.
+	def validate_unique_email(self):
+		# Rule 28: checked only when an email is entered, so blank emails never collide.
 		if not self.email:
 			return
 		existing = frappe.db.get_value("Tenant", {"email": self.email, "name": ["!=", self.name or ""]}, "name")
 		if existing:
-			frappe.throw(_("A tenant with this email already exists: {0}").format(existing))
+			frappe.throw(_("A tenant with this email already exists: {0}.").format(existing))
+
+	def validate_emergency_contacts(self):
+		# At least one emergency contact is needed before verification, checked there.
+		# Here, only check each row is complete, which the required fields already do.
+		pass
 
 	def validate_verification(self):
 		if self.status != "Verified":
 			return
+		missing = []
 		if not self.kyc_documents:
-			frappe.throw(_("Attach the KYC documents before marking this tenant as Verified."))
+			missing.append(_("KYC documents"))
 		if not self.kra_pin:
-			frappe.throw(_("Enter the KRA PIN before marking this tenant as Verified."))
+			missing.append(_("KRA PIN"))
+		if not self.consent_given:
+			missing.append(_("consent"))
+		if not self.get("emergency_contacts"):
+			missing.append(_("an emergency contact"))
+		if missing:
+			frappe.throw(_("Before a tenant can be Verified, add: {0}.").format(", ".join(missing)))
 
 	def validate_tenant_type_change(self):
-		# The linked customer's type is set once, so the tenant type cannot change afterwards.
+		# Rule 30: the customer's type is set when it is created, so it cannot change afterwards.
 		if self.is_new() or not self.customer:
 			return
 		old_type = frappe.db.get_value("Tenant", self.name, "tenant_type")
@@ -72,8 +81,10 @@ class Tenant(Document):
 			frappe.throw(_("Tenant type cannot be changed once a customer has been created."))
 
 	def on_update(self):
+		# Rule 29: creating the customer on verification.
 		if self.status == "Verified":
 			self.ensure_customer()
+		# Rule 31: keep the customer in step with the tenant.
 		self.sync_customer()
 
 	def ensure_customer(self):
@@ -83,7 +94,6 @@ class Tenant(Document):
 		selling = frappe.get_single("Selling Settings")
 		customer = frappe.get_doc({
 			"doctype": "Customer",
-			# Customer names must be unique in ERPNext, and two tenants can share a name.
 			"customer_name": f"{self.tenant_name} [{self.name}]",
 			"customer_type": self.tenant_type,
 			"customer_group": selling.get("customer_group") or "Individual",
@@ -96,7 +106,6 @@ class Tenant(Document):
 		self.db_set("customer", customer.name, update_modified=False)
 
 	def sync_customer(self):
-		# Keeps the customer in step with the tenant record and blocks new invoices for inactive tenants.
 		if not self.customer or not frappe.db.exists("Customer", self.customer):
 			return
 		frappe.db.set_value(
@@ -112,7 +121,8 @@ class Tenant(Document):
 		)
 
 	def on_trash(self):
-		if frappe.db.exists("DocType", "Lease") and frappe.db.exists("Lease", {"tenant": self.name}):
+		# Rule 32: a tenant with leases cannot be deleted.
+		if frappe.db.exists("Lease", {"tenant": self.name}):
 			frappe.throw(_("Cannot delete this tenant because it has leases. Set the status to Inactive instead."))
 		if self.customer and frappe.db.exists("Sales Invoice", {"customer": self.customer}):
 			frappe.throw(_("Cannot delete this tenant because its customer has invoices. Set the status to Inactive instead."))
