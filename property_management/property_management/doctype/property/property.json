@@ -14,14 +14,14 @@
   "county",
   "town_area",
   "status",
+  "landlords",
+  "documents",
+  "amenities",
   "description",
   "street_road",
   "estate_neighbourhood",
   "property_image",
-  "postal_code",
-  "amenities",
-  "landlords",
-  "documents"
+  "postal_code"
  ],
  "fields": [
   {
@@ -116,14 +116,13 @@
    "fieldname": "documents",
    "fieldtype": "Table",
    "label": "Documents",
-   "options": "Property Document",
-   "reqd": 1
+   "options": "Property Document"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-11-16 11:40:34.392830",
+ "modified": "2026-11-17 12:07:29.858606",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Property",

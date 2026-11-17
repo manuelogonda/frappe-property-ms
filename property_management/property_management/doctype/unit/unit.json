@@ -6,15 +6,15 @@
  "field_order": [
   "unit_name",
   "unit_code",
-  "property",
-  "building",
   "unit_type",
+  "property",
+  "monthly_rent",
+  "status",
+  "building",
   "floor_number",
   "bedrooms",
   "bathrooms",
-  "monthly_rent",
-  "security_deposit",
-  "status"
+  "security_deposit"
  ],
  "fields": [
   {
@@ -96,13 +96,14 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Status",
-   "options": "Vacant\nOccupied\nReserved\nMaintenance\nInactive"
+   "options": "Vacant\nOccupied\nReserved\nMaintenance\nInactive",
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-11-16 12:39:20.861574",
+ "modified": "2026-11-17 12:51:30.206023",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Unit",

@@ -26,7 +26,7 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Tenant Type",
-   "options": "individual\ncompany",
+   "options": "Individual\nCompany\nPartnership",
    "reqd": 1
   },
   {
@@ -108,7 +108,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-11-17 10:54:33.034709",
+ "modified": "2026-11-17 13:56:13.181571",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Tenant",

@@ -11,10 +11,10 @@
   "management_agreement",
   "status",
   "start_date",
-  "end_date",
-  "rent_amount",
   "security_deposit",
+  "rent_amount",
   "payment_due_day",
+  "end_date",
   "notice_period",
   "renewal_allowed",
   "renewal_notes",
@@ -142,12 +142,15 @@
    "label": "Lease Document"
   },
   {
+   "description": "Changes on an active lease only through an approved rent review",
    "fieldname": "rent_amount",
    "fieldtype": "Currency",
    "label": "Rent Amount",
+   "read_only_depends_on": "eval:doc.status=='Active'",
    "reqd": 1
   },
   {
+   "default": "Monthly",
    "fieldname": "payment_frequency",
    "fieldtype": "Select",
    "label": "Payment Frequency",
@@ -242,7 +245,7 @@
  ],
  "grid_page_length": 50,
  "links": [],
- "modified": "2026-11-16 14:21:58.616290",
+ "modified": "2026-11-17 13:52:37.066344",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Lease",
