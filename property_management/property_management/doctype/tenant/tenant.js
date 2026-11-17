@@ -24,9 +24,23 @@ frappe.ui.form.on("Tenant", {
 	},
 
 	set_id_label(frm) {
-		const label = frm.doc.tenant_type === "Company" ? __("Registration Number") : __("National ID Number");
+		// Company shows a registration number. Individual, or no type yet, shows a national ID.
+		const isCompany = (frm.doc.tenant_type || "").toLowerCase() === "company";
+
+		const label = isCompany ? __("Registration Number") : __("National ID Number");
+		const hint = isCompany
+			? __("Enter the company's registration number.")
+			: __("Enter the individual's national ID number.");
+
 		frm.set_df_property("id_number_or_registration_number", "label", label);
+		frm.set_df_property("id_number_or_registration_number", "description", hint);
+		frm.refresh_field("id_number_or_registration_number");
 	},
+
+	// set_id_label(frm) {
+	// 	const label = frm.doc.tenant_type === "Company" ? __("Registration Number") : __("National ID Number");
+	// 	frm.set_df_property("id_number_or_registration_number", "label", label);
+	// },
 
 	kra_pin(frm) {
 		const pin = (frm.doc.kra_pin || "").trim().toUpperCase();
