@@ -1,150 +1,81 @@
 {
- "actions": [],
- "allow_bulk_edit": 1,
- "allow_rename": 1,
- "creation": "2026-11-12 14:19:04.960088",
- "doctype": "DocType",
- "engine": "InnoDB",
- "field_order": [
-  "work_order_number",
-  "maintenance_request",
-  "property",
-  "unit",
-  "asigned_to_type",
-  "staff_user",
-  "contractor",
-  "estimate",
-  "approval_status",
-  "approved_by",
-  "approved_on",
-  "labour_cost",
-  "total_cost",
-  "cost_bearer",
-  "status",
-  "started_on",
-  "completed_on"
- ],
- "fields": [
-  {
-   "fieldname": "work_order_number",
-   "fieldtype": "Data",
-   "label": "Work Order Number\t"
-  },
-  {
-   "fieldname": "maintenance_request",
-   "fieldtype": "Link",
-   "label": "Maintenance Request",
-   "options": "Maintenance Request"
-  },
-  {
-   "fieldname": "property",
-   "fieldtype": "Link",
-   "label": "Property",
-   "options": "Property"
-  },
-  {
-   "fieldname": "unit",
-   "fieldtype": "Link",
-   "label": "Unit",
-   "options": "Unit"
-  },
-  {
-   "fieldname": "asigned_to_type",
-   "fieldtype": "Select",
-   "label": "Assigned To Type",
-   "options": "Internal Staff\nContractor"
-  },
-  {
-   "fieldname": "staff_user",
-   "fieldtype": "Link",
-   "label": "Staff User",
-   "options": "User"
-  },
-  {
-   "fieldname": "contractor",
-   "fieldtype": "Link",
-   "label": "Contractor",
-   "options": "Supplier"
-  },
-  {
-   "fieldname": "estimate",
-   "fieldtype": "Currency",
-   "label": "Estimate"
-  },
-  {
-   "fieldname": "approval_status",
-   "fieldtype": "Select",
-   "label": "Approval Status",
-   "options": "Not Required\nPending\nApproved\nRejected"
-  },
-  {
-   "fieldname": "approved_by",
-   "fieldtype": "Date",
-   "label": "Approved By"
-  },
-  {
-   "fieldname": "approved_on",
-   "fieldtype": "Date",
-   "label": "Approved On"
-  },
-  {
-   "fieldname": "labour_cost",
-   "fieldtype": "Currency",
-   "label": "Labour Cost"
-  },
-  {
-   "fieldname": "total_cost",
-   "fieldtype": "Currency",
-   "label": "Total Cost"
-  },
-  {
-   "fieldname": "cost_bearer",
-   "fieldtype": "Select",
-   "label": "Cost Bearer",
-   "options": "Owner\nTenant\nCompany"
-  },
-  {
-   "fieldname": "status",
-   "fieldtype": "Select",
-   "label": "Status",
-   "options": "Estimate Pending\nApproved\nIn Progress\nCompleted\nCancelled"
-  },
-  {
-   "fieldname": "started_on",
-   "fieldtype": "Datetime",
-   "label": "Started On"
-  },
-  {
-   "fieldname": "completed_on",
-   "fieldtype": "Datetime",
-   "label": "Completed On"
-  }
- ],
- "grid_page_length": 50,
- "index_web_pages_for_search": 1,
- "links": [],
- "modified": "2026-11-18 12:28:16.636431",
- "modified_by": "Administrator",
- "module": "Property Management",
- "name": "Maintenance Work Order",
- "owner": "Administrator",
- "permissions": [
-  {
-   "create": 1,
-   "delete": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "System Manager",
-   "share": 1,
-   "write": 1
-  }
- ],
- "row_format": "Dynamic",
- "rows_threshold_for_grid_search": 20,
- "sort_field": "creation",
- "sort_order": "DESC",
- "states": []
+  "actions": [],
+  "allow_bulk_edit": 0,
+  "allow_rename": 0,
+  "autoname": "format:WO-{YYYY}-{#####}",
+  "creation": "2026-11-12 14:19:04.960088",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "maintenance_request",
+    "property",
+    "unit",
+    "description",
+    "section_assignment",
+    "assigned_to_type",
+    "staff_user",
+    "contractor",
+    "section_cost",
+    "estimate",
+    "approval_status",
+    "approved_by",
+    "approved_on",
+    "materials",
+    "labour_cost",
+    "total_cost",
+    "cost_bearer",
+    "section_progress",
+    "status",
+    "started_on",
+    "completed_on",
+    "purchase_invoice"
+  ],
+  "fields": [
+    {"fieldname": "maintenance_request", "fieldtype": "Link", "label": "Maintenance Request", "options": "Maintenance Request", "in_list_view": 1, "in_standard_filter": 1},
+    {"fieldname": "property", "fieldtype": "Link", "label": "Property", "options": "Property", "reqd": 1, "in_list_view": 1, "in_standard_filter": 1},
+    {"fieldname": "unit", "fieldtype": "Link", "label": "Unit", "options": "Unit", "reqd": 1, "in_list_view": 1},
+    {"fieldname": "description", "fieldtype": "Text", "label": "Work Description", "reqd": 1},
+
+    {"fieldname": "section_assignment", "fieldtype": "Section Break", "label": "Assignment"},
+    {"fieldname": "assigned_to_type", "fieldtype": "Select", "label": "Assigned To Type", "options": "Internal Staff\nContractor", "reqd": 1},
+    {"fieldname": "staff_user", "fieldtype": "Link", "label": "Staff User", "options": "User", "depends_on": "eval:doc.assigned_to_type=='Internal Staff'", "mandatory_depends_on": "eval:doc.assigned_to_type=='Internal Staff'", "in_list_view": 1},
+    {"fieldname": "contractor", "fieldtype": "Link", "label": "Contractor", "options": "Supplier", "depends_on": "eval:doc.assigned_to_type=='Contractor'", "mandatory_depends_on": "eval:doc.assigned_to_type=='Contractor'", "in_list_view": 1},
+
+    {"fieldname": "section_cost", "fieldtype": "Section Break", "label": "Estimate and Costs"},
+    {"fieldname": "estimate", "fieldtype": "Currency", "label": "Estimate", "reqd": 1},
+    {"fieldname": "approval_status", "fieldtype": "Select", "label": "Approval Status", "options": "Not Required\nPending\nApproved\nRejected", "default": "Pending", "reqd": 1, "read_only": 1},
+    {"fieldname": "approved_by", "fieldtype": "Link", "label": "Approved By", "options": "User", "read_only": 1},
+    {"fieldname": "approved_on", "fieldtype": "Datetime", "label": "Approved On", "read_only": 1},
+    {"fieldname": "materials", "fieldtype": "Table", "label": "Materials", "options": "Work Order Material"},
+    {"fieldname": "labour_cost", "fieldtype": "Currency", "label": "Labour Cost (Contractor)"},
+    {"fieldname": "total_cost", "fieldtype": "Currency", "label": "Total Cost", "read_only": 1},
+    {"fieldname": "cost_bearer", "fieldtype": "Select", "label": "Cost Bearer", "options": "Owner\nTenant\nCompany", "reqd": 1},
+
+    {"fieldname": "section_progress", "fieldtype": "Section Break", "label": "Progress"},
+    {"fieldname": "status", "fieldtype": "Select", "label": "Status", "options": "Estimate Pending\nApproved\nIn Progress\nCompleted\nCancelled", "default": "Estimate Pending", "reqd": 1, "in_list_view": 1, "in_standard_filter": 1, "read_only": 1},
+    {"fieldname": "started_on", "fieldtype": "Datetime", "label": "Started On", "read_only": 1},
+    {"fieldname": "completed_on", "fieldtype": "Datetime", "label": "Completed On", "read_only": 1},
+    {"fieldname": "purchase_invoice", "fieldtype": "Link", "label": "Purchase Invoice", "options": "Purchase Invoice", "read_only": 1}
+  ],
+  "grid_page_length": 50,
+  "index_web_pages_for_search": 0,
+  "links": [],
+  "modified": "2026-11-18 13:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Property Management",
+  "name": "Maintenance Work Order",
+  "naming_rule": "Expression",
+  "owner": "Administrator",
+  "permissions": [
+    {"role": "System Manager", "create": 1, "delete": 1, "email": 1, "export": 1, "print": 1, "read": 1, "report": 1, "share": 1, "write": 1},
+    {"role": "Property Manager", "create": 1, "email": 1, "print": 1, "read": 1, "report": 1, "write": 1},
+    {"role": "Accounts Manager", "email": 1, "export": 1, "print": 1, "read": 1, "report": 1, "write": 1},
+    {"role": "Maintenance Staff", "email": 1, "print": 1, "read": 1, "report": 1, "write": 1}
+  ],
+  "row_format": "Dynamic",
+  "rows_threshold_for_grid_search": 20,
+  "sort_field": "creation",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
 }
