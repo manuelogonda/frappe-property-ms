@@ -2,6 +2,7 @@
  "actions": [],
  "allow_bulk_edit": 1,
  "allow_rename": 1,
+ "autoname": "field:meter_number",
  "creation": "2026-11-12 15:23:38.946369",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -11,53 +12,91 @@
   "meter_type",
   "property",
   "unit",
-  "status"
+  "status",
+  "replaced_by",
+  "replaced_on",
+  "last_reading_date"
  ],
  "fields": [
   {
    "fieldname": "meter_number",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "Meter Number",
+   "reqd": 1,
    "unique": 1
   },
   {
    "fieldname": "utility_type",
    "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Utility Type",
-   "options": "Electricity\nWater"
+   "options": "Electricity\nWater",
+   "reqd": 1
   },
   {
    "fieldname": "meter_type",
    "fieldtype": "Select",
+   "in_list_view": 1,
    "label": "Meter Type",
-   "options": "Individual\nSub-meter\nBulk"
+   "options": "Individual\nSub-meter\nBulk",
+   "reqd": 1
   },
   {
    "fieldname": "property",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Property",
-   "options": "Property"
+   "options": "Property",
+   "reqd": 1
   },
   {
    "fieldname": "unit",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Unit",
    "options": "Unit"
   },
   {
+   "default": "Active",
    "fieldname": "status",
    "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Status",
-   "options": "Active\nReplaced\nInactive"
+   "options": "Active\nReplaced\nInactive",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.status=='Replaced'",
+   "fieldname": "replaced_by",
+   "fieldtype": "Link",
+   "label": "Replaced By",
+   "options": "Meter",
+   "reqd": 1
+  },
+  {
+   "fieldname": "replaced_on",
+   "fieldtype": "Date",
+   "label": "Replaced On",
+   "mandatory_depends_on": "eval:doc.status=='Replaced'",
+   "reqd": 1
+  },
+  {
+   "fieldname": "last_reading_date",
+   "fieldtype": "Date",
+   "label": "Last Reading Date"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-11-12 15:27:40.203154",
+ "modified": "2026-11-18 13:50:46.382664",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Meter",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {
@@ -71,6 +110,35 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Projects Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accountant",
+   "share": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Maintenance Staff",
+   "share": 1
   }
  ],
  "row_format": "Dynamic",
