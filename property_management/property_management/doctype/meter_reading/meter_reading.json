@@ -2,6 +2,7 @@
  "actions": [],
  "allow_bulk_edit": 1,
  "allow_rename": 1,
+ "autoname": "MRD-.YYYY.-.#####",
  "creation": "2026-11-12 15:28:06.064729",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -12,24 +13,35 @@
   "previous_reading",
   "consumed_units",
   "read_by",
-  "photo"
+  "photo",
+  "reading_type",
+  "billed",
+  "utility_bill"
  ],
  "fields": [
   {
    "fieldname": "meter",
    "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Meter",
-   "options": "Meter"
+   "options": "Meter",
+   "reqd": 1
   },
   {
    "fieldname": "reading_date",
    "fieldtype": "Date",
-   "label": "Reading Date"
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Reading Date",
+   "reqd": 1
   },
   {
    "fieldname": "reading_value",
    "fieldtype": "Float",
-   "label": "Reading Value"
+   "in_list_view": 1,
+   "label": "Reading Value",
+   "reqd": 1
   },
   {
    "fieldname": "previous_reading",
@@ -44,6 +56,7 @@
    "read_only": 1
   },
   {
+   "default": "user",
    "fieldname": "read_by",
    "fieldtype": "Link",
    "label": "Read By",
@@ -53,15 +66,39 @@
    "fieldname": "photo",
    "fieldtype": "Attach Image",
    "label": "Photo"
+  },
+  {
+   "default": "Actual",
+   "fieldname": "reading_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Reading Type",
+   "options": "Actual\nEstimated",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "billed",
+   "fieldtype": "Check",
+   "label": "Billed",
+   "read_only": 1
+  },
+  {
+   "fieldname": "utility_bill",
+   "fieldtype": "Link",
+   "label": "Utility Bill",
+   "options": "Utility Bill"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-11-12 15:33:46.861711",
+ "modified": "2026-11-18 14:02:15.806500",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Meter Reading",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {
@@ -75,6 +112,35 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accountant",
+   "share": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Property Manager",
+   "share": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Maintenance Staff",
+   "share": 1
   }
  ],
  "row_format": "Dynamic",
