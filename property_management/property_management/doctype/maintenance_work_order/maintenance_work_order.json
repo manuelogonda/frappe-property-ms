@@ -34,7 +34,7 @@
    "fieldname": "maintenance_request",
    "fieldtype": "Link",
    "label": "Maintenance Request",
-   "options": "Maintenace Request"
+   "options": "Maintenance Request"
   },
   {
    "fieldname": "property",
@@ -123,7 +123,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-11-12 14:35:26.779053",
+ "modified": "2026-11-18 12:28:16.636431",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Maintenance Work Order",
