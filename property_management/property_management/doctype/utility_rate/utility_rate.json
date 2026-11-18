@@ -2,6 +2,7 @@
  "actions": [],
  "allow_bulk_edit": 1,
  "allow_rename": 1,
+ "autoname": "UR-.YYYY.-.#####",
  "creation": "2026-11-12 15:34:06.914398",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -10,43 +11,81 @@
   "effective_from",
   "effective_to",
   "rate_per_unit",
-  "fixed_charge"
+  "fixed_charge",
+  "tax_treatment",
+  "currency",
+  "source_referrence"
  ],
  "fields": [
   {
    "fieldname": "utility_type",
    "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Utility Type",
-   "options": "Electricity\nWater"
+   "options": "Electricity\nWater",
+   "reqd": 1
   },
   {
    "fieldname": "effective_from",
    "fieldtype": "Date",
-   "label": "Effective From"
+   "in_list_view": 1,
+   "label": "Effective From",
+   "reqd": 1
   },
   {
+   "description": "Leave blank if the rate is still in force",
    "fieldname": "effective_to",
    "fieldtype": "Date",
+   "in_list_view": 1,
    "label": "Effective To"
   },
   {
    "fieldname": "rate_per_unit",
    "fieldtype": "Currency",
-   "label": "Rate Per Unit"
+   "in_list_view": 1,
+   "label": "Rate Per Unit",
+   "reqd": 1
   },
   {
+   "default": "0",
    "fieldname": "fixed_charge",
    "fieldtype": "Currency",
+   "in_list_view": 1,
    "label": "Fixed Charge"
+  },
+  {
+   "default": "Excluded",
+   "fieldname": "tax_treatment",
+   "fieldtype": "Select",
+   "label": "Tax Treatment",
+   "options": "Excluded\nIncluded\nAdded on top",
+   "reqd": 1
+  },
+  {
+   "default": "KES",
+   "fieldname": "currency",
+   "fieldtype": "Currency",
+   "label": "Currency",
+   "options": "Currency",
+   "read_only": 1
+  },
+  {
+   "description": "The tariff sheet or notice this rate comes from",
+   "fieldname": "source_referrence",
+   "fieldtype": "Data",
+   "label": "Source Referrence",
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-11-12 15:38:50.237318",
+ "modified": "2026-11-18 14:15:41.523558",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Utility Rate",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {
@@ -60,6 +99,26 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accountant",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Property Manager",
+   "share": 1
   }
  ],
  "row_format": "Dynamic",
