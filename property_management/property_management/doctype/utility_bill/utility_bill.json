@@ -1,119 +1,81 @@
 {
- "actions": [],
- "allow_bulk_edit": 1,
- "allow_rename": 1,
- "creation": "2026-11-12 15:39:09.187158",
- "doctype": "DocType",
- "engine": "InnoDB",
- "field_order": [
-  "meter",
-  "billing_start_date",
-  "billing_end_date",
-  "opening_reading",
-  "closing_reading",
-  "units_consumed",
-  "rate_applied",
-  "electricity__water_charge",
-  "fixed_charge",
-  "total",
-  "status",
-  "sales_invoice"
- ],
- "fields": [
-  {
-   "fieldname": "meter",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Meter",
-   "options": "Meter",
-   "reqd": 1
-  },
-  {
-   "fieldname": "billing_start_date",
-   "fieldtype": "Date",
-   "label": "Billing Start Date"
-  },
-  {
-   "fieldname": "billing_end_date",
-   "fieldtype": "Date",
-   "label": "Billing End Date"
-  },
-  {
-   "fieldname": "opening_reading",
-   "fieldtype": "Link",
-   "label": "Opening Reading",
-   "options": "Meter Reading"
-  },
-  {
-   "fieldname": "closing_reading",
-   "fieldtype": "Link",
-   "label": "Closing Reading",
-   "options": "Meter Reading"
-  },
-  {
-   "fieldname": "units_consumed",
-   "fieldtype": "Float",
-   "label": "Units Consumed"
-  },
-  {
-   "fieldname": "rate_applied",
-   "fieldtype": "Link",
-   "label": "Rate Applied",
-   "options": "Utility Rate"
-  },
-  {
-   "fieldname": "electricity__water_charge",
-   "fieldtype": "Currency",
-   "label": "Electricity / Water Charge"
-  },
-  {
-   "fieldname": "fixed_charge",
-   "fieldtype": "Currency",
-   "label": "Fixed Charge"
-  },
-  {
-   "fieldname": "total",
-   "fieldtype": "Currency",
-   "label": "Total"
-  },
-  {
-   "fieldname": "status",
-   "fieldtype": "Select",
-   "label": "Status",
-   "options": "Draft\nCalculated\nInvoiced\nCancelled"
-  },
-  {
-   "fieldname": "sales_invoice",
-   "fieldtype": "Link",
-   "label": "Sales Invoice",
-   "options": "Sales Invoice"
-  }
- ],
- "grid_page_length": 50,
- "index_web_pages_for_search": 1,
- "links": [],
- "modified": "2026-11-12 15:50:14.170290",
- "modified_by": "Administrator",
- "module": "Property Management",
- "name": "Utility Bill",
- "owner": "Administrator",
- "permissions": [
-  {
-   "create": 1,
-   "delete": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "System Manager",
-   "share": 1,
-   "write": 1
-  }
- ],
- "row_format": "Dynamic",
- "rows_threshold_for_grid_search": 20,
- "sort_field": "creation",
- "sort_order": "DESC",
- "states": []
+  "actions": [],
+  "allow_bulk_edit": 0,
+  "allow_rename": 0,
+  "autoname": "UB-.YYYY.-.#####",
+  "creation": "2026-11-12 15:39:09.187158",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "meter",
+    "property",
+    "unit",
+    "tenant",
+    "lease",
+    "status",
+    "section_period",
+    "billing_start_date",
+    "billing_end_date",
+    "opening_reading",
+    "closing_reading",
+    "units_consumed",
+    "periods",
+    "section_charges",
+    "utility_charge",
+    "fixed_charge",
+    "tax_treatment",
+    "total",
+    "section_allocation",
+    "allocations",
+    "section_invoice",
+    "sales_invoice"
+  ],
+  "fields": [
+    {"fieldname": "meter", "fieldtype": "Link", "label": "Meter", "options": "Meter", "reqd": 1, "in_list_view": 1, "in_standard_filter": 1},
+    {"fieldname": "property", "fieldtype": "Link", "label": "Property", "options": "Property", "read_only": 1, "in_standard_filter": 1},
+    {"fieldname": "unit", "fieldtype": "Link", "label": "Unit", "options": "Unit", "read_only": 1, "in_list_view": 1},
+    {"fieldname": "tenant", "fieldtype": "Link", "label": "Tenant", "options": "Tenant", "read_only": 1},
+    {"fieldname": "lease", "fieldtype": "Link", "label": "Lease", "options": "Lease", "read_only": 1},
+    {"fieldname": "status", "fieldtype": "Select", "label": "Status", "options": "Draft\nCalculated\nInvoiced\nCancelled", "default": "Draft", "reqd": 1, "in_list_view": 1, "in_standard_filter": 1, "read_only": 1},
+
+    {"fieldname": "section_period", "fieldtype": "Section Break", "label": "Billing Period"},
+    {"fieldname": "billing_start_date", "fieldtype": "Date", "label": "Billing Start Date", "reqd": 1},
+    {"fieldname": "billing_end_date", "fieldtype": "Date", "label": "Billing End Date", "reqd": 1},
+    {"fieldname": "opening_reading", "fieldtype": "Link", "label": "Opening Reading", "options": "Meter Reading", "read_only": 1},
+    {"fieldname": "closing_reading", "fieldtype": "Link", "label": "Closing Reading", "options": "Meter Reading", "read_only": 1},
+    {"fieldname": "units_consumed", "fieldtype": "Float", "label": "Units Consumed", "read_only": 1},
+    {"fieldname": "periods", "fieldtype": "Table", "label": "Rate Periods", "options": "Utility Bill Period", "read_only": 1},
+
+    {"fieldname": "section_charges", "fieldtype": "Section Break", "label": "Charges"},
+    {"fieldname": "utility_charge", "fieldtype": "Currency", "label": "Utility Charge", "read_only": 1},
+    {"fieldname": "fixed_charge", "fieldtype": "Currency", "label": "Fixed Charge", "read_only": 1},
+    {"fieldname": "tax_treatment", "fieldtype": "Select", "label": "Tax Treatment", "options": "Excluded\nIncluded\nAdded on top", "read_only": 1},
+    {"fieldname": "total", "fieldtype": "Currency", "label": "Total", "read_only": 1, "in_list_view": 1},
+
+    {"fieldname": "section_allocation", "fieldtype": "Section Break", "label": "Allocation (bulk meters only)", "depends_on": "eval:doc.meter_type=='Bulk'"},
+    {"fieldname": "allocations", "fieldtype": "Table", "label": "Allocations", "options": "Utility Bill Allocation", "depends_on": "eval:doc.meter_type=='Bulk'"},
+
+    {"fieldname": "section_invoice", "fieldtype": "Section Break", "label": "Invoice"},
+    {"fieldname": "sales_invoice", "fieldtype": "Link", "label": "Sales Invoice", "options": "Sales Invoice", "read_only": 1}
+  ],
+  "grid_page_length": 50,
+  "index_web_pages_for_search": 0,
+  "links": [],
+  "modified": "2026-11-18 17:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Property Management",
+  "name": "Utility Bill",
+  "naming_rule": "Expression",
+  "owner": "Administrator",
+  "permissions": [
+    {"role": "System Manager", "create": 1, "delete": 1, "email": 1, "export": 1, "print": 1, "read": 1, "report": 1, "share": 1, "write": 1},
+    {"role": "Accounts Manager", "create": 1, "email": 1, "export": 1, "print": 1, "read": 1, "report": 1, "write": 1},
+    {"role": "Property Manager", "email": 1, "print": 1, "read": 1, "report": 1}
+  ],
+  "row_format": "Dynamic",
+  "rows_threshold_for_grid_search": 20,
+  "sort_field": "creation",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
 }

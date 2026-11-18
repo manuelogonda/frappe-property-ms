@@ -1,0 +1,28 @@
+{
+  "actions": [],
+  "creation": "2026-11-18 16:00:00.000000",
+  "doctype": "DocType",
+  "editable_grid": 1,
+  "engine": "InnoDB",
+  "field_order": ["unit", "tenant", "basis", "share", "amount"],
+  "fields": [
+    {"fieldname": "unit", "fieldtype": "Link", "label": "Unit", "options": "Unit", "in_list_view": 1, "reqd": 1},
+    {"fieldname": "tenant", "fieldtype": "Link", "label": "Tenant", "options": "Tenant", "in_list_view": 1, "read_only": 1},
+    {"fieldname": "basis", "fieldtype": "Float", "label": "Allocation Basis", "description": "Area, occupants or equal share"},
+    {"fieldname": "share", "fieldtype": "Percent", "label": "Share %", "in_list_view": 1, "reqd": 1},
+    {"fieldname": "amount", "fieldtype": "Currency", "label": "Amount", "in_list_view": 1, "read_only": 1}
+  ],
+  "istable": 1,
+  "links": [],
+  "module": "Property Management",
+  "modified": "2026-11-18 16:00:00.000000",
+  "modified_by": "Administrator",
+  "name": "Utility Bill Allocation",
+  "owner": "Administrator",
+  "permissions": [],
+  "row_format": "Dynamic",
+  "sort_field": "creation",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 0
+}
