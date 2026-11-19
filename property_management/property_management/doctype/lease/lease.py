@@ -36,6 +36,7 @@ class Lease(Document):
 		self.validate_schedule()
 		self.validate_termination()                # Rule 50
 		self.warn_unsupported_charges()
+		self.validate_handover()
 
 	def clean_fields(self):
 		self.lease_number = clean_number(self.lease_number)
@@ -180,6 +181,19 @@ class Lease(Document):
 
 	def on_update(self):
 		self.sync_unit_status()
+
+
+	def validate_handover(self):
+		# Handover can complete only with an inspection report and keys returned.
+		if self.handover_status != "Completed":
+			return
+		if not self.inspection_report:
+			frappe.throw(_("Attach the inspection report before completing handover."))
+		if not self.keys_returned:
+			frappe.throw(_("Confirm the keys have been returned before completing handover."))
+		if not self.handover_date:
+			self.handover_date = frappe.utils.today()
+
 
 	def sync_unit_status(self):
 		# The lease is the source of truth for occupancy. Units follow it.
