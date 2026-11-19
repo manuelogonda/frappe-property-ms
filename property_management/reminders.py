@@ -147,3 +147,19 @@ def dispatch(inv, lease_doc, reminder_type, notice_number, channel, address, sub
 
 def _money(value):
 	return f"{flt(value):,.2f}"
+
+
+def log_notification(key, reminder_type, reference, tenant, channel, recipient, status, notice_number=0, error=None):
+	frappe.get_doc({
+		"doctype": "Reminder Log",
+		"reminder_key": key,
+		"reminder_type": reminder_type,
+		"notice_number": notice_number,
+		"lease": reference if reminder_type in ("Lease Expiry", "Notice Deadline") else None,
+		"tenant": tenant,
+		"channel": channel,
+		"recipient": recipient or "",
+		"status": status,
+		"sent_at": now_datetime(),
+		"error": error or "",
+	}).insert(ignore_permissions=True)

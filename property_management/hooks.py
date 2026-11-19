@@ -282,6 +282,8 @@ scheduler_events = {
 		"property_management.tasks.expire_ended_leases",
 		"property_management.tasks.generate_due_invoices",
 		"property_management.tasks.alert_expiring_property_documents",
+		"property_management.tasks.alert_lease_expiries",
+		"property_management.tasks.alert_notice_deadlines",
 	],
 	"hourly": [
 		"property_management.reminders.send_due_reminders",

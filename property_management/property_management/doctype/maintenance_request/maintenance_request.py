@@ -54,10 +54,26 @@ class MaintenanceRequest(Document):
 	def on_update(self):
 		self.notify_status_change()
 
-	def notify_status_change(self):
-		# Phase 4 step 6 adds the tenant update here. Recorded for later.
-		pass
-
 	def on_trash(self):
 		if self.status != "Open":
 			frappe.throw(_("Only open requests can be deleted. Set the status to Cancelled instead."))
+
+	def notify_status_change(self):
+	    if self.is_new() or not self.tenant:
+	       return  # Staff-reported requests have no tenant to update.
+		old_status = frappe.db.get_value("Maintenance Request", self.name, "status")
+		if old_status == self.status:
+			return  # No change, so nothing to send.
+
+		key = f"MU|{self.name}|{self.status}"
+		if frappe.db.exists("Reminder Log", {"reminder_key": key}):
+			return  # Already sent for this status.
+
+		tenant = frappe.db.get_value("Tenant", self.tenant, ["tenant_name", "email", "phone_number"], as_dict=True)
+		message = _("Dear {0}, your maintenance request {1} for unit {2} is now {3}.").format(
+			tenant.tenant_name, self.name, self.unit, self.status)
+		subject = _("Maintenance update: {0}").format(self.name)
+
+		if tenant.email:
+			frappe.sendmail(recipients=[tenant.email], subject=subject, message=message)
+		_log(key, "Maintenance Update", self.name, self.tenant, "Email", tenant.email, "Sent")
