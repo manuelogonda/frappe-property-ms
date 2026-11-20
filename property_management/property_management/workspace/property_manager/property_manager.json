@@ -1,0 +1,91 @@
+{
+ "charts": [],
+ "content": "[{\"id\": \"h1\", \"type\": \"header\", \"data\": {\"text\": \"\\u003cspan class=\\\"h4\\\"\\u003e\\u003cb\\u003eProperty Manager\\u003c/b\\u003e\\u003c/span\\u003e\", \"col\": 12}}, {\"id\": \"c1\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Leases ending in 90 days\", \"col\": 3}}, {\"id\": \"c2\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Occupancy Rate\", \"col\": 3}}, {\"id\": \"c3\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Open Maintenance Requests\", \"col\": 3}}, {\"id\": \"c4\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Open Work Orders\", \"col\": 3}}, {\"id\": \"s1\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Unit\", \"col\": 4}}, {\"id\": \"s2\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Lease\", \"col\": 4}}, {\"id\": \"s3\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Maintenance Request\", \"col\": 4}}]",
+ "creation": "2026-11-20 10:37:57.762801",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "hide_custom": 0,
+ "idx": 0,
+ "indicator_color": "green",
+ "is_hidden": 0,
+ "label": "Property Manager",
+ "link_type": "DocType",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Lease Expiry Report",
+   "link_count": 0,
+   "link_to": "Lease Expiry Report",
+   "link_type": "Report",
+   "onboard": 0,
+   "report_ref_doctype": "Lease",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Occupancy",
+   "link_count": 0,
+   "link_to": "Occupancy Report",
+   "link_type": "Report",
+   "onboard": 0,
+   "report_ref_doctype": "Unit",
+   "type": "Link"
+  }
+ ],
+ "modified": "2026-11-20 12:47:27.793687",
+ "modified_by": "Administrator",
+ "module": "Property Management",
+ "name": "Property Manager",
+ "number_cards": [
+  {
+   "number_card_name": "Leases ending in 90 days"
+  },
+  {
+   "number_card_name": "Occupancy Rate"
+  },
+  {
+   "number_card_name": "Open Maintenance Requests"
+  },
+  {
+   "number_card_name": "Open Work Orders"
+  }
+ ],
+ "owner": "Administrator",
+ "public": 0,
+ "quick_lists": [],
+ "roles": [
+  {
+   "role": "Property Manager"
+  }
+ ],
+ "sequence_id": 0.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Unit",
+   "link_to": "Unit",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Lease",
+   "link_to": "Lease",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Maintenance Request",
+   "link_to": "Maintenance Request",
+   "type": "DocType"
+  }
+ ],
+ "standard": 1,
+ "title": "Property Manager",
+ "type": "Workspace"
+}

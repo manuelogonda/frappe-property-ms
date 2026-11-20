@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Tenant</title>
+</head>
+<body>
+{% extends "templates/web.html" %}
+{% block page_content %}
+<h2>Your tenancy</h2>
+<p>Balance due: {{ frappe.format_value(balance, {"fieldtype": "Currency"}) }}</p>
+
+<h3>Leases</h3>
+<ul>
+	{% for l in leases %}
+	<li>{{ l.name }}: unit {{ l.unit }}, {{ l.status }}, {{ l.start_date }} to {{ l.end_date or "open-ended" }}</li>
+	{% else %}
+	<li>No leases on your account.</li>
+	{% endfor %}
+</ul>
+
+<h3>Open invoices</h3>
+<ul>
+	{% for i in open_invoices %}
+	<li><a href="/tenant/invoice?name={{ i.name }}">{{ i.name }}</a>: due {{ i.due_date }}</li>
+	{% endfor %}
+</ul>
+{% endblock %}
+
+</body>
+</html>
