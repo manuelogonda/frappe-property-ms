@@ -12,6 +12,10 @@
   "proposed_rent",
   "approved_rent",
   "effective_date",
+   "acknowledged_by",
+   "acknowledged_on",
+   "approved_on",
+   "approved_by",
   "reason",
   "approved_status"
  ],
@@ -61,7 +65,11 @@
    "label": "Approved Status",
    "options": "Pending\nApproved\nRejected",
    "reqd": 1
-  }
+  },
+   {"fieldname": "acknowledged_by", "fieldtype": "Link", "label": "Acknowledged By", "options": "User", "read_only": 1},
+   {"fieldname": "acknowledged_on", "fieldtype": "Datetime", "label": "Acknowledged On", "read_only": 1},
+   {"fieldname": "approved_by", "fieldtype": "Link", "label": "Approved By", "options": "User", "read_only": 1},
+   {"fieldname": "approved_on", "fieldtype": "Datetime", "label": "Approved On", "read_only": 1}
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+{% extends "templates/web.html" %}
+{% block title %}Rent reviews{% endblock %}
+{% block page_content %}
+<h2>Rent reviews to acknowledge</h2>
+{% if error %}<p class="text-danger">{{ error }}</p>{% endif %}
+{% if done %}<p>Acknowledged. The Accounts Manager will decide.</p>{% endif %}
+{% for r in reviews %}
+<div>
+	<p>Unit {{ r.unit }} (lease {{ r.lease }}): rent from {{ r.current_rent }} to {{ r.proposed_rent }} on {{ r.review_date }}. Reason: {{ r.reason }}</p>
+	<form method="post" action="/landlord/approvals">
+		<input type="hidden" name="csrf_token" value="{{ frappe.session.csrf_token }}">
+		<input type="hidden" name="review" value="{{ r.name }}">
+		<button type="submit">I have read this review</button>
+	</form>
+</div>
+{% else %}
+<p>No rent reviews are waiting for you.</p>
+{% endfor %}
+{% endblock %}
+</body>
+</html>

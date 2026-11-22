@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Landlord</title>
+</head>
+<body>
+{% extends "templates/web.html" %}
+{% block title %}Your properties{% endblock %}
+{% block page_content %}
+<nav class="landlord-menu">
+	<a href="/landlord">Home</a>
+	<a href="/landlord/approvals">Rent reviews</a>
+	<a href="/landlord/contact">Change my details</a>
+	<a href="/landlord/requests">My requests</a>
+	<a href="/logout">Log out</a>
+</nav>
+
+<h2>Your properties</h2>
+<ul>
+	{% for p in properties %}<li>{{ p.property_name }}, {{ p.town_area }} ({{ p.status }})</li>
+	{% else %}<li>No properties are linked to your account.</li>{% endfor %}
+</ul>
+
+<h3>Rent on your properties</h3>
+<p>Collected: {{ frappe.format_value(collected, {"fieldtype": "Currency"}) }}
+	· Outstanding: {{ frappe.format_value(outstanding, {"fieldtype": "Currency"}) }}</p>
+<p><em>Figures as recorded on invoices in ERPNext.</em></p>
+
+<h3>Expenses (owner-borne)</h3>
+<ul>
+	{% for w in work_orders %}<li>{{ w.name }}, {{ w.property }}, {{ w.status }}: {{ frappe.format_value(w.total_cost, {"fieldtype": "Currency"}) }}</li>
+	{% else %}<li>No owner-borne expenses.</li>{% endfor %}
+</ul>
+
+<h3>Owner statements</h3>
+<p>Statements appear here once owner settlement is posted for a period.</p>
+{% endblock %}
+</body>
+</html>

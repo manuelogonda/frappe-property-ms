@@ -86,3 +86,62 @@ def redirect_portal_user(login_manager):
 	if frappe.db.exists("Tenant", {"user": user}):
 		frappe.local.response["home_page"] = "/tenant"
 
+
+
+def current_landlord():
+	user = frappe.session.user
+	if user == "Guest":
+		frappe.throw(_("Please log in to view your account."), frappe.PermissionError)
+	landlord = frappe.db.get_value("Landlord", {"user": user}, ["name", "status"], as_dict=True)
+	if not landlord or landlord.status != "Verified":
+		frappe.throw(_("No active landlord account is linked to this login."), frappe.PermissionError)
+	return landlord
+
+
+def landlord_properties(landlord_name):
+	return frappe.get_all("Property Landlord", filters={"landlord": landlord_name}, pluck="parent")
+
+
+@frappe.whitelist()
+def acknowledge_rent_review(review_name):
+	landlord = current_landlord()
+	review = frappe.db.get_value(
+		"Lease Rent Review", review_name,
+		["parent", "approved_status", "acknowledged_on"], as_dict=True,
+	)
+	if not review:
+		frappe.throw(_("Record not found."), frappe.DoesNotExistError)
+	lease_property = frappe.db.get_value("Lease", review.parent, "property")
+	if lease_property not in landlord_properties(landlord.name):
+		frappe.throw(_("Record not found."), frappe.DoesNotExistError)
+	if review.approved_status != "Pending" or review.acknowledged_on:
+		frappe.throw(_("This rent review has already been acknowledged."), frappe.ValidationError)
+	frappe.db.set_value(
+		"Lease Rent Review", review_name,
+		{"acknowledged_by": frappe.session.user, "acknowledged_on": now_datetime()},
+		update_modified=False,
+	)
+	return review_name
+
+
+@frappe.whitelist()
+def request_contact_change(changes, reason=None):
+	landlord = current_landlord()
+	if isinstance(changes, str):
+		changes = frappe.parse_json(changes)
+	allowed = CONTACT_FIELDS + PAYOUT_FIELDS
+	clean = {k: str(v).strip() for k, v in (changes or {}).items() if k in allowed and str(v or "").strip()}
+	if not clean:
+		frappe.throw(_("Enter at least one change."), frappe.ValidationError)
+	doc = frappe.get_doc({
+		"doctype": "Portal Request",
+		"request_type": "Contact Change",
+		"landlord": landlord.name,
+		"status": "Pending",
+		"reason": reason,
+		**clean,
+	})
+	doc.insert(ignore_permissions=True)
+	return doc.name
+
+

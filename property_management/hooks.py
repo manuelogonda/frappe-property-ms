@@ -293,4 +293,16 @@ scheduler_events = {
 	],
 }
 
+permission_query_conditions = {
+	"Lease": "property_management.permissions.lease_query",
+	"Tenant": "property_management.permissions.tenant_query",
+	"Landlord": "property_management.permissions.landlord_query",
+	"Property": "property_management.permissions.property_query",
+	"Maintenance Request": "property_management.permissions.maintenance_request_query",
+	"Work Order": "property_management.permissions.work_order_query",
+	"Sales Invoice": "property_management.permissions.sales_invoice_query",
+	"Payment Entry": "property_management.permissions.payment_entry_query",
+	"Portal Request": "property_management.permissions.portal_request_query",
+}
+
 
