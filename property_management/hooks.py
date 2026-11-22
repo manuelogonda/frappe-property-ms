@@ -277,6 +277,9 @@ app_license = "mit"
 # List of apps whose translatable strings should be excluded from this app's translations.
 # ignore_translatable_strings_from = []
 
+on_session_creation = "property_management.portal.redirect_portal_user"
+
+
 scheduler_events = {
 	"daily": [
 		"property_management.tasks.expire_ended_leases",

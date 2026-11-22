@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+{% extends "templates/web.html" %}
+
+{% block title %}Your receipts{% endblock %}
+
+{% block page_content %}
+<nav class="tenant-menu">
+	<a href="/tenant">Home</a>
+	<a href="/tenant/invoices">Invoices</a>
+	<a href="/tenant/receipts">Receipts</a>
+	<a href="/tenant/maintenance">Report a problem</a>
+	<a href="/tenant/requests">My requests</a>
+	<a href="/logout">Log out</a>
+</nav>
+
+<h2>Your receipts</h2>
+<table>
+	<tr><th>Receipt</th><th>Date</th><th>Amount</th><th>Method</th><th>Reference</th></tr>
+	{% for r in receipts %}
+	<tr>
+		<td>{{ r.name }}</td>
+		<td>{{ r.posting_date }}</td>
+		<td>{{ frappe.format_value(r.paid_amount, {"fieldtype": "Currency"}) }}</td>
+		<td>{{ r.mode_of_payment or "" }}</td>
+		<td>{{ r.reference_no or "" }}</td>
+	</tr>
+	{% else %}
+	<tr><td colspan="5">No receipts yet.</td></tr>
+	{% endfor %}
+</table>
+{% endblock %}
+</body>
+</html>

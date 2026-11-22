@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+{% extends "templates/web.html" %}
+
+{% block title %}My requests{% endblock %}
+
+{% block page_content %}
+<nav class="tenant-menu">
+	<a href="/tenant">Home</a>
+	<a href="/tenant/invoices">Invoices</a>
+	<a href="/tenant/receipts">Receipts</a>
+	<a href="/tenant/maintenance">Report a problem</a>
+	<a href="/tenant/requests">My requests</a>
+	<a href="/logout">Log out</a>
+</nav>
+
+<h2>My requests</h2>
+<table>
+	<tr><th>Request</th><th>Category</th><th>Priority</th><th>Status</th><th>Reported</th></tr>
+	{% for r in requests %}
+	<tr>
+		<td>{{ r.name }}</td>
+		<td>{{ r.category }}</td>
+		<td>{{ r.priority }}</td>
+		<td>{{ r.status }}</td>
+		<td>{{ frappe.format_date(r.creation) }}</td>
+	</tr>
+	{% else %}
+	<tr><td colspan="5">You have not reported any problems. <a href="/tenant/maintenance">Report one</a>.</td></tr>
+	{% endfor %}
+</table>
+{% endblock %}
+</body>
+</html>

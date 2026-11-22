@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Invoices</title>
+</head>
+<body>
+{% extends "templates/web.html" %}
+
+{% block title %}Your invoices{% endblock %}
+
+{% block page_content %}
+<nav class="tenant-menu">
+	<a href="/tenant">Home</a>
+	<a href="/tenant/invoices">Invoices</a>
+	<a href="/tenant/receipts">Receipts</a>
+	<a href="/tenant/maintenance">Report a problem</a>
+	<a href="/tenant/requests">My requests</a>
+	<a href="/logout">Log out</a>
+</nav>
+
+<h2>Your invoices</h2>
+<table>
+	<tr><th>Invoice</th><th>Date</th><th>Due</th><th>Amount</th><th>Outstanding</th><th>Status</th></tr>
+	{% for i in invoices %}
+	<tr>
+		<td><a href="/tenant/invoice?name={{ i.name }}">{{ i.name }}</a></td>
+		<td>{{ i.posting_date }}</td>
+		<td>{{ i.due_date }}</td>
+		<td>{{ frappe.format_value(i.grand_total, {"fieldtype": "Currency"}) }}</td>
+		<td>{{ frappe.format_value(i.outstanding_amount, {"fieldtype": "Currency"}) }}</td>
+		<td>{{ i.status }}</td>
+	</tr>
+	{% else %}
+	<tr><td colspan="6">No invoices yet.</td></tr>
+	{% endfor %}
+</table>
+{% endblock %}
+</body>
+</html>

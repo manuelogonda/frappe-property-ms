@@ -1,12 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Tenant</title>
-</head>
-<body>
 {% extends "templates/web.html" %}
+
+{% block title %}Your tenancy{% endblock %}
+
 {% block page_content %}
+<nav class="tenant-menu">
+	<a href="/tenant">Home</a>
+	<a href="/tenant/invoices">Invoices</a>
+	<a href="/tenant/receipts">Receipts</a>
+	<a href="/tenant/maintenance">Report a problem</a>
+	<a href="/tenant/requests">My requests</a>
+	<a href="/logout">Log out</a>
+</nav>
+
 <h2>Your tenancy</h2>
 <p>Balance due: {{ frappe.format_value(balance, {"fieldtype": "Currency"}) }}</p>
 
@@ -26,6 +31,3 @@
 	{% endfor %}
 </ul>
 {% endblock %}
-
-</body>
-</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Maintenance</title>
+</head>
+<body>
+{% extends "templates/web.html" %}
+
+{% block title %}Report a problem{% endblock %}
+
+{% block page_content %}
+<nav class="tenant-menu">
+	<a href="/tenant">Home</a>
+	<a href="/tenant/invoices">Invoices</a>
+	<a href="/tenant/receipts">Receipts</a>
+	<a href="/tenant/maintenance">Report a problem</a>
+	<a href="/tenant/requests">My requests</a>
+	<a href="/logout">Log out</a>
+</nav>
+
+<h2>Report a problem</h2>
+
+{% if created %}
+<p>Thank you. Your request <strong>{{ created }}</strong> has been sent. <a href="/tenant/requests">View your requests</a>.</p>
+{% else %}
+
+{% if error %}
+<p class="text-danger">{{ error }}</p>
+{% endif %}
+
+<form method="post" action="/tenant/maintenance">
+	<input type="hidden" name="csrf_token" value="{{ frappe.session.csrf_token }}">
+
+	<label>Category</label>
+	<select name="category" required>
+		{% for c in categories %}<option value="{{ c }}">{{ c }}</option>{% endfor %}
+	</select>
+
+	<label>Priority</label>
+	<select name="priority" required>
+		{% for p in priorities %}<option value="{{ p }}">{{ p }}</option>{% endfor %}
+	</select>
+
+	<label>Describe the problem</label>
+	<textarea name="description" rows="5" required></textarea>
+
+	<button type="submit">Send request</button>
+</form>
+{% endif %}
+{% endblock %}
+</body>
+</html>
