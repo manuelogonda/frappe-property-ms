@@ -16,8 +16,4 @@ def get_context(context):
 	)
 	context.collected = sum(float(i.grand_total or 0) - float(i.outstanding_amount or 0) for i in context.invoices)
 	context.outstanding = sum(float(i.outstanding_amount or 0) for i in context.invoices)
-	context.work_orders = frappe.get_list(
-		"Work Order",
-		fields=["name", "property", "unit", "status", "total_cost", "completed_on"],
-		filters={"cost_bearer": "Owner"}, order_by="creation desc", limit=50,
-	)
+

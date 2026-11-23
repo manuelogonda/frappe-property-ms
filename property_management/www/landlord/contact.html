@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Landlord Contacts</title>
+</head>
+<body>
+{% extends "templates/web.html" %}
+
+{% block title %}Change my details{% endblock %}
+
+{% block page_content %}
+<nav class="landlord-menu">
+	<a href="/landlord">Home</a>
+	<a href="/landlord/approvals">Rent reviews</a>
+	<a href="/landlord/contact">Change my details</a>
+	<a href="/landlord/requests">My requests</a>
+	<a href="/logout">Log out</a>
+</nav>
+
+<h2>Change my details</h2>
+<p>Changes are sent to the Property Manager for approval. Nothing changes until it is approved.</p>
+
+{% if created %}
+<p>Your request <strong>{{ created }}</strong> has been sent for approval.
+	<a href="/landlord/requests">View my requests</a>.</p>
+{% else %}
+
+{% if error %}<p class="text-danger">{{ error }}</p>{% endif %}
+
+<form method="post" action="/landlord/contact">
+	<input type="hidden" name="csrf_token" value="{{ frappe.session.csrf_token }}">
+
+	<h3>Contact details</h3>
+	<label>Phone</label><input type="text" name="phone">
+	<label>Email</label><input type="email" name="email">
+	<label>Address</label><textarea name="address" rows="2"></textarea>
+
+	<h3>Payout details</h3>
+	<p>Payout changes are checked by the Property Manager and applied by the Accounts Manager.</p>
+	<label>M-Pesa phone number</label><input type="text" name="mpesa_phone_number">
+	<label>Bank name</label><input type="text" name="bank_name">
+	<label>Bank branch</label><input type="text" name="bank_branch">
+	<label>Bank account name</label><input type="text" name="bank_account_name">
+	<label>Bank account number</label><input type="text" name="bank_account_number">
+
+	<label>Reason for the change</label>
+	<textarea name="reason" rows="2"></textarea>
+
+	<button type="submit">Send for approval</button>
+</form>
+{% endif %}
+{% endblock %}
+</body>
+</html>

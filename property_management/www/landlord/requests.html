@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Landlord Requests</title>
+</head>
+<body>
+{% extends "templates/web.html" %}
+
+{% block title %}My requests{% endblock %}
+
+{% block page_content %}
+<nav class="landlord-menu">
+	<a href="/landlord">Home</a>
+	<a href="/landlord/approvals">Rent reviews</a>
+	<a href="/landlord/contact">Change my details</a>
+	<a href="/landlord/requests">My requests</a>
+	<a href="/logout">Log out</a>
+</nav>
+
+<h2>My requests</h2>
+<table>
+	<tr><th>Request</th><th>Type</th><th>Status</th><th>Payout included</th><th>Sent</th></tr>
+	{% for r in requests %}
+	<tr>
+		<td>{{ r.name }}</td>
+		<td>{{ r.request_type }}</td>
+		<td>{{ r.status }}</td>
+		<td>{{ "Yes" if r.has_payout_change else "No" }}</td>
+		<td>{{ frappe.format_date(r.creation) }}</td>
+	</tr>
+	{% else %}
+	<tr><td colspan="5">You have not sent any changes. <a href="/landlord/contact">Change my details</a>.</td></tr>
+	{% endfor %}
+</table>
+{% endblock %}
+</body>
+</html>

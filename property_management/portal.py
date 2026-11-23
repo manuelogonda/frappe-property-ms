@@ -83,9 +83,10 @@ def redirect_portal_user(login_manager):
 	user = frappe.session.user
 	if frappe.get_cached_value("User", user, "user_type") != "Website User":
 		return
-	if frappe.db.exists("Tenant", {"user": user}):
+	if frappe.db.exists("Landlord", {"user": user}):
+		frappe.local.response["home_page"] = "/landlord"
+	elif frappe.db.exists("Tenant", {"user": user}):
 		frappe.local.response["home_page"] = "/tenant"
-
 
 
 def current_landlord():

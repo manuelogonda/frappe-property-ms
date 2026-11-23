@@ -11,17 +11,19 @@
   "landlord_name",
   "email",
   "id_number_or_registration_number",
+  "preferred_payment_method",
   "kra_pin",
   "status",
   "phone",
-  "preferred_payment_method",
   "mpesa_phone_number",
   "address",
   "kyc_documents",
   "bank_account_number",
   "bank_name",
   "bank_account_name",
-  "bank_branch"
+  "bank_branch",
+  "portal_user",
+  "user"
  ],
  "fields": [
   {
@@ -125,12 +127,28 @@
    "fieldtype": "Phone",
    "label": "Phone",
    "reqd": 1
+  },
+  {
+   "fieldname": "portal_user",
+   "fieldtype": "Link",
+   "label": "Portal User",
+   "options": "User",
+   "read_only": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "user",
+   "fieldtype": "Link",
+   "label": "Portal User",
+   "options": "User",
+   "read_only": 1,
+   "unique": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-11-17 11:43:44.905546",
+ "modified": "2026-11-23 15:51:12.181087",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Landlord",
